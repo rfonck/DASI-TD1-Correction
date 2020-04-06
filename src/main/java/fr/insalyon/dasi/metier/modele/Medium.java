@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.metier.modele;
 
 
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
