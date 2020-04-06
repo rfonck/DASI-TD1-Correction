@@ -12,6 +12,8 @@ import fr.insalyon.dasi.metier.modele.Astrologue;
 import fr.insalyon.dasi.metier.service.Service;
 import java.util.Date;
 import java.util.List;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
