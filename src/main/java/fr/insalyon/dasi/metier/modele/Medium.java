@@ -27,7 +27,6 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED) 
-
 public class Medium implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

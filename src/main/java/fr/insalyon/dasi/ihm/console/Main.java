@@ -49,7 +49,7 @@ public class Main {
         
         /**test de persistances **/  
         
-        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("UTILISATEURS_PU");
+        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DASI-PU");
         EntityManager em1 = emf1.createEntityManager();      
         
         try {
@@ -73,7 +73,7 @@ public class Main {
         
         
         
-        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("MEDIUM_PU");
+        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("DASI-PU");
         EntityManager em2 = emf2.createEntityManager();      
         
         try {
@@ -96,7 +96,7 @@ public class Main {
 
         
         
-        EntityManagerFactory emf3 = Persistence.createEntityManagerFactory("SEANCEVOYANCE_PU");
+        EntityManagerFactory emf3 = Persistence.createEntityManagerFactory("DASI-PU");
         EntityManager em3 = emf3.createEntityManager();      
         
         try {

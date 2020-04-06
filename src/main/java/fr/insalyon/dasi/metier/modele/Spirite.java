@@ -22,7 +22,6 @@ import javax.persistence.Temporal;
  * @author rfonc
  */
 @Entity
-
 public class Spirite extends Medium implements Serializable  {
     
     private String denomination;

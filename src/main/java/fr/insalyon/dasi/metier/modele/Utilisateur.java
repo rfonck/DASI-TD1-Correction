@@ -5,6 +5,7 @@
  */
 package fr.insalyon.dasi.metier.modele;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public  class Utilisateur {
+public  class Utilisateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
