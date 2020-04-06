@@ -1,50 +1,18 @@
+
+
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="DASI-PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fr.insalyon.dasi.metier.modele.ClientOld</class>
-    <properties>
-      <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/Chatte"/>
-      <property name="eclipselink.jdbc.user" value="Chatte"/>
-      <property name="eclipselink.jdbc.password" value="bite"/>
-      <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
-      <property name="javax.persistence.jdbc.user" value="route"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="barree"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="SEANCEVOYANCE_PU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>fr.insalyon.dasi.metier.modele.SeanceVoyance</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
-      <property name="javax.persistence.jdbc.user" value="route"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="barree"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="MEDIUM_PU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>fr.insalyon.dasi.metier.modele.Medium</class>
-    <class>fr.insalyon.dasi.metier.modele.Spirite</class>
     <class>fr.insalyon.dasi.metier.modele.Astrologue</class>
     <class>fr.insalyon.dasi.metier.modele.Cartomancien</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
-      <property name="javax.persistence.jdbc.user" value="route"/>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="barree"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-    </properties>
-  </persistence-unit>
-  <persistence-unit name="UTILISATEURS_PU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>fr.insalyon.dasi.metier.modele.Employe</class>
-    <class>fr.insalyon.dasi.metier.modele.Utilisateur</class>
     <class>fr.insalyon.dasi.metier.modele.Client</class>
+    <class>fr.insalyon.dasi.metier.modele.Employe</class>
+    <class>fr.insalyon.dasi.metier.modele.Medium</class>
+    <class>fr.insalyon.dasi.metier.modele.SeanceVoyance</class>
+    <class>fr.insalyon.dasi.metier.modele.Spirite</class>
+    <class>fr.insalyon.dasi.metier.modele.Utilisateur</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
       <property name="javax.persistence.jdbc.user" value="route"/>
@@ -54,3 +22,4 @@
     </properties>
   </persistence-unit>
 </persistence>
+
