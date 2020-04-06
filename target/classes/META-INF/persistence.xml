@@ -4,10 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fr.insalyon.dasi.metier.modele.ClientOld</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/test"/>
-      <property name="javax.persistence.jdbc.user" value="roro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
+      <property name="javax.persistence.jdbc.user" value="route"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="roro"/>
+      <property name="javax.persistence.jdbc.password" value="barree"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
@@ -15,10 +15,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fr.insalyon.dasi.metier.modele.SeanceVoyance</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/test"/>
-      <property name="javax.persistence.jdbc.user" value="roro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
+      <property name="javax.persistence.jdbc.user" value="route"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="roro"/>
+      <property name="javax.persistence.jdbc.password" value="barree"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
@@ -29,10 +29,10 @@
     <class>fr.insalyon.dasi.metier.modele.Astrologue</class>
     <class>fr.insalyon.dasi.metier.modele.Cartomancien</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/test"/>
-      <property name="javax.persistence.jdbc.user" value="roro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
+      <property name="javax.persistence.jdbc.user" value="route"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="roro"/>
+      <property name="javax.persistence.jdbc.password" value="barree"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
@@ -42,10 +42,10 @@
     <class>fr.insalyon.dasi.metier.modele.Utilisateur</class>
     <class>fr.insalyon.dasi.metier.modele.Client</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/test"/>
-      <property name="javax.persistence.jdbc.user" value="roro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
+      <property name="javax.persistence.jdbc.user" value="route"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="roro"/>
+      <property name="javax.persistence.jdbc.password" value="barree"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
@@ -53,10 +53,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fr.insalyon.dasi.metier.modele.SeanceVoyance</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/test"/>
-      <property name="javax.persistence.jdbc.user" value="roro"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dasidb"/>
+      <property name="javax.persistence.jdbc.user" value="route"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.password" value="roro"/>
+      <property name="javax.persistence.jdbc.password" value="barree"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
