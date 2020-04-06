@@ -1,8 +1,8 @@
 package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.Entity;
-
 import java.util.Date;
 
 /**
@@ -18,6 +18,19 @@ public class Client extends Utilisateur implements Serializable {
     private String animalTotem;
     private String couleurBonheur;
 
+    
+    public Client(String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String signeAstrologique, String signeChinois, String animalTotem, String couleurBonheur) {
+        super(Nom, Prenom, DateNaissance, Adresse, Email, NumTel, MotDePasse);
+        this.signeAstrologique = signeAstrologique;
+        this.signeChinois = signeChinois;
+        this.animalTotem = animalTotem;
+        this.couleurBonheur = couleurBonheur;
+    }
+
+    public void setId(Long Id) {
+        this.Id = Id;
+    }
+        
     public void setSigneAstrologique(String signeAstrologique) {
         this.signeAstrologique = signeAstrologique;
     }
@@ -43,7 +56,7 @@ public class Client extends Utilisateur implements Serializable {
         this.Prenom = Prenom;
     }
     @Override
-    public void setDateNaissance(Date DateNaissance) {
+    public void setDateNaissance(Calendar DateNaissance) {
         this.DateNaissance = DateNaissance;
     }
     @Override
@@ -95,7 +108,7 @@ public class Client extends Utilisateur implements Serializable {
     }
     
     @Override
-    public Date getDateNaissance() {
+    public Calendar getDateNaissance() {
         return DateNaissance;
     }
     
@@ -121,17 +134,13 @@ public class Client extends Utilisateur implements Serializable {
     
     }
 
-    public Client(String Nom, String Prenom, Date DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String signeAstrologique, String signeChinois, String animalTotem, String couleurBonheur) {
-        super(Nom, Prenom, DateNaissance, Adresse, Email, NumTel, MotDePasse);
-        this.signeAstrologique = signeAstrologique;
-        this.signeChinois = signeChinois;
-        this.animalTotem = animalTotem;
-        this.couleurBonheur = couleurBonheur;
-    }
-
     @Override
     public String toString() {
-        return "Iencli{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + ", signeAstrologique=" + signeAstrologique + ", signeChinois=" + signeChinois + ", animalTotem=" + animalTotem + ", couleurBonheur=" + couleurBonheur + '}';
+        return "Client{" + "signeAstrologique=" + signeAstrologique + ", signeChinois=" + signeChinois + ", animalTotem=" + animalTotem + ", couleurBonheur=" + couleurBonheur + '}';
     }
+
+
+
+
 
 }

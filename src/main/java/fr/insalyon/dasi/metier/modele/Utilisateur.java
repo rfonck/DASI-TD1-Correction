@@ -6,6 +6,7 @@
 package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public  class Utilisateur implements Serializable {
     protected String Nom;
     protected String Prenom;
     @Temporal(javax.persistence.TemporalType.DATE)
-    protected Date DateNaissance;
+    protected Calendar DateNaissance;
     protected String Adresse;
     protected String Email;
     protected int NumTel;
@@ -39,7 +40,7 @@ public  class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur( String Nom, String Prenom, Date DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse) {
+    public Utilisateur( String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse) {
         this.Nom = Nom;
         this.Prenom = Prenom;
         this.DateNaissance = DateNaissance;
@@ -61,7 +62,7 @@ public  class Utilisateur implements Serializable {
         return Prenom;
     }
 
-    public Date getDateNaissance() {
+    public Calendar getDateNaissance() {
         return DateNaissance;
     }
 
@@ -71,11 +72,6 @@ public  class Utilisateur implements Serializable {
 
     public String getEmail() {
         return Email;
-    }
-
-    @Override
-    public String toString() {
-        return "Utilisateur{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + '}';
     }
 
     public int getNumTel() {
@@ -94,7 +90,7 @@ public  class Utilisateur implements Serializable {
         this.Prenom = Prenom;
     }
 
-    public void setDateNaissance(Date DateNaissance) {
+    public void setDateNaissance(Calendar DateNaissance) {
         this.DateNaissance = DateNaissance;
     }
 
@@ -114,8 +110,10 @@ public  class Utilisateur implements Serializable {
         this.MotDePasse = MotDePasse;
     }
     
-    
-    
+    @Override
+    public String toString() {
+        return "Utilisateur{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + '}';
+    }
     
     
 }
