@@ -49,72 +49,33 @@ public class Main {
         
         /**test de persistances **/  
         
-        EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DASI-PU");
-        EntityManager em1 = emf1.createEntityManager();      
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DASI-PU");
+        EntityManager em = emf.createEntityManager();      
         
         try {
-            em1.getTransaction().begin();
-            em1.persist(JjLeRageux);
-            em1.getTransaction().commit();
+            em.getTransaction().begin();
+            em.persist(JjLeRageux);
+            em.persist(thomas);
+            em.persist(bastien);
+            em.persist(Mario);
+            em.persist(jj);
+            em.persist(aurel);
+            em.persist(voy1);
+            em.getTransaction().commit();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
             try {
-                em1.getTransaction().rollback();
+                em.getTransaction().rollback();
             }
             catch (IllegalStateException ex2) {
                 // Ignorer cette exception...
             }
         } finally {
-            em1.close();
+            em.close();
         }
 
         
-        
-        
-        
-        
-        EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("DASI-PU");
-        EntityManager em2 = emf2.createEntityManager();      
-        
-        try {
-            em2.getTransaction().begin();
-            em2.persist(bastien);
-            em2.persist(jj);
-            em2.persist(aurel);
-            em2.getTransaction().commit();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
-            try {
-                em2.getTransaction().rollback();
-            }
-            catch (IllegalStateException ex2) {
-                // Ignorer cette exception...
-            }
-        } finally {
-            em2.close();
-        }
-
-        
-        
-        EntityManagerFactory emf3 = Persistence.createEntityManagerFactory("DASI-PU");
-        EntityManager em3 = emf3.createEntityManager();      
-        
-        try {
-            em3.getTransaction().begin();
-            em3.persist(voy1);
-            em3.getTransaction().commit();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service", ex);
-            try {
-                em3.getTransaction().rollback();
-            }
-            catch (IllegalStateException ex2) {
-                // Ignorer cette exception...
-            }
-        } finally {
-            em3.close();
-        }
-        
+    
         
     }
 }
