@@ -7,6 +7,7 @@ package fr.insalyon.dasi.metier.modele;
 
 import fr.insalyon.dasi.metier.modele.Utilisateur;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -24,13 +25,12 @@ public class Employe extends Utilisateur implements Serializable {
     public Employe() {
     }
 
-    public Employe(String Genre, boolean ConsultationEnCours, int NombreSeance, String Nom, String Prenom, Date DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse) {
+    public Employe(String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String Genre, boolean ConsultationEnCours, int NombreSeance) {
         super(Nom, Prenom, DateNaissance, Adresse, Email, NumTel, MotDePasse);
         this.Genre = Genre;
         this.ConsultationEnCours = ConsultationEnCours;
         this.NombreSeance = NombreSeance;
     }
-
 
 
     public String getGenre() {
@@ -57,7 +57,7 @@ public class Employe extends Utilisateur implements Serializable {
         return Prenom;
     }
     @Override
-    public Date getDateNaissance() {
+    public Calendar getDateNaissance() {
         return DateNaissance;
     }
     @Override
@@ -98,7 +98,7 @@ public class Employe extends Utilisateur implements Serializable {
         this.Prenom = Prenom;
     }
     @Override
-    public void setDateNaissance(Date DateNaissance) {
+    public void setDateNaissance(Calendar DateNaissance) {
         this.DateNaissance = DateNaissance;
     }
     @Override
@@ -117,11 +117,10 @@ public class Employe extends Utilisateur implements Serializable {
     public void setMotDePasse(String MotDePasse) {
         this.MotDePasse = MotDePasse;
     }
-    
+
     @Override
     public String toString() {
-        return "Employe{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + ", Genre=" + Genre + ", ConsultationEnCours=" + ConsultationEnCours + ", NombreSeance=" + NombreSeance + '}';
+        return "Employe{" + "Genre=" + Genre + ", ConsultationEnCours=" + ConsultationEnCours + ", NombreSeance=" + NombreSeance + '}';
     }
-    
-    
+
 }
