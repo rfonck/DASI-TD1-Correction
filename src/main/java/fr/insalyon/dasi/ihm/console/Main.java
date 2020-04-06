@@ -36,7 +36,7 @@ public class Main {
         Medium bastien = new Cartomancien( "bgdlacalle", "cartes", "nom", "prenom", "sexe");
         System.out.println("-> " + bastien.toString());   
         
-        Date aujourdhui = new Date(System.currentTimeMillis()); 
+        Date aujourdhui = new Date(2020-1900,10,10); 
         
         Employe thomas  = new Employe("je me définit comme une sorte de fusion entre la tièdeur d'une soirée d'automne et la bise de printemps qui caresse les fleurs de cerisiers.",false, 12,"Nom", "Prenom", aujourdhui, "Adresse", "Email", 1029384756, "MotDePasse");
         Client JjLeRageux = new Client( "meldrum", "jj", aujourdhui, "efae", "zefjaepip", 123456789, "MotDePasse","cancer", "pinguin","ane", "blanc cassé");

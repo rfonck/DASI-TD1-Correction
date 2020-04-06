@@ -128,16 +128,10 @@ public class Client extends Utilisateur implements Serializable {
         this.animalTotem = animalTotem;
         this.couleurBonheur = couleurBonheur;
     }
-    
-    
-    
 
     @Override
     public String toString() {
         return "Iencli{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + ", signeAstrologique=" + signeAstrologique + ", signeChinois=" + signeChinois + ", animalTotem=" + animalTotem + ", couleurBonheur=" + couleurBonheur + '}';
     }
 
-    
-    
-    
 }
