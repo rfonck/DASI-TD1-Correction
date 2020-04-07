@@ -16,15 +16,15 @@ public class EmployeDao {
         em.persist(employe);
     }
     
-    public Employe chercherParId(Long clientId) {
+    public Employe chercherParId(Long employeId) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        return em.find(Employe.class, clientId); // renvoie null si l'identifiant n'existe pas
+        return em.find(Employe.class, employeId); // renvoie null si l'identifiant n'existe pas
     }
     
-    public Employe chercherParMail(String clientMail) {
+    public Employe chercherParMail(String employeMail) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         TypedQuery<Employe> query = em.createQuery("SELECT * FROM ROUTE.UTILISATEUR inner join ROUTE.EMPLOYE on ROUTE.UTILISATEUR.ID =  ROUTE.EMPLOYE.ID where email = :mail", Employe.class);
-        query.setParameter("mail", clientMail); // correspond au paramètre ":mail" dans la requête
+        query.setParameter("mail", employeMail); // correspond au paramètre ":mail" dans la requête
         List<Employe> employes = query.getResultList();
         Employe result = null;
         if (!employes.isEmpty()) {
@@ -33,7 +33,7 @@ public class EmployeDao {
         return result;
     }
     
-    public List<Employe> listerClients() {
+    public List<Employe> listerEmployers() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         TypedQuery<Employe> query = em.createQuery("SELECT * FROM ROUTE.UTILISATEUR inner join ROUTE.EMPLOYE on ROUTE.UTILISATEUR.ID =  ROUTE.EMPLOYE.ID ORDER BY c.nom ASC, c.prenom ASC", Employe.class);
         return query.getResultList();
