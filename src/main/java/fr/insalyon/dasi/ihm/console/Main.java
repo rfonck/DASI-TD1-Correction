@@ -57,6 +57,15 @@ public class Main {
 
         service.inscrireClient(Matteo);
         service.inscrireEmploye(thomas);
+        service.creerMedium(jj);
+        
+        Client iencli = service.rechercherClientParMail("eee");
+        Employe emplo = service.rechercherEmployeParMail("Email");
+        Astrologue astro = service.rechercherAstrologueParNom("nom");
+        
+        TimeZone debut = Calendar.getInstance().getTimeZone();
+        SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", iencli, emplo, astro);
+        service.inscrireSeanceVoyance(seance);
         
         JpaUtil.destroy();
   
