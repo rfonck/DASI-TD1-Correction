@@ -11,9 +11,9 @@ import javax.persistence.TypedQuery;
  */
 public class SeanceVoyanceDao {
     
-    public void creer(SeanceVoyance employe) {
+    public void creer(SeanceVoyance seance) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        em.persist(employe);
+        em.persist(seance);
     }
     
     public SeanceVoyance chercherParId(Long seanceVoyanceId) {

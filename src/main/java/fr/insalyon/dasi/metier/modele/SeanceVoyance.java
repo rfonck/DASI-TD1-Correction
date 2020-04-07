@@ -31,29 +31,27 @@ public class SeanceVoyance implements Serializable {
     private String commentaire;
     
     @ManyToOne
-    private Client idClient;
+    private Client client;
     @ManyToOne
-    private Employe idEmploye;
+    private Employe employe;
     @ManyToOne
-    private Medium idMedium;    
+    private Medium medium;    
 
-    public SeanceVoyance(TimeZone debut, TimeZone fin, Boolean enCours, String commentaire, Client idClient, Employe idEmploye, Medium idMedium) {
+    public SeanceVoyance(TimeZone debut, TimeZone fin, Boolean enCours, String commentaire, Client client, Employe employe, Medium medium) {
         this.debut = debut;
         this.fin = fin;
         this.enCours = enCours;
         this.commentaire = commentaire;
-        this.idClient = idClient;
-        this.idEmploye = idEmploye;
-        this.idMedium = idMedium;
+        this.client = client;
+        this.employe = employe;
+        this.medium = medium;
     }
-
-
 
     public SeanceVoyance(TimeZone debut, Client client, Employe employe, Medium medium) {
         this.debut = debut;
-        this.idClient = client;
-        this.idEmploye = employe;
-        this.idMedium = medium;
+        this.client = client;
+        this.employe = employe;
+        this.medium = medium;
         this.enCours = true;
     }
     
@@ -61,6 +59,15 @@ public class SeanceVoyance implements Serializable {
         this.commentaire  = commentaire;
         this.fin = Calendar.getInstance().getTimeZone(); 
         this.enCours = false;   
+    }
+    
+       
+    public SeanceVoyance() {
+    }
+
+    public void fin_seance() {
+        this.fin = Calendar.getInstance().getTimeZone();
+        this.enCours = false;
     }
     
     public Long getId() {
@@ -83,18 +90,17 @@ public class SeanceVoyance implements Serializable {
         return commentaire;
     }
 
-    public Client getIdClient() {
-        return idClient;
+    public Client getClient() {
+        return client;
     }
 
-    public Employe getIdEmploye() {
-        return idEmploye;
+    public Employe getEmploye() {
+        return employe;
     }
 
-    public Medium getIdMedium() {
-        return idMedium;
+    public Medium getMedium() {
+        return medium;
     }
-
 
 
 
@@ -114,36 +120,27 @@ public class SeanceVoyance implements Serializable {
         this.commentaire = commentaire;
     }
 
-    public void setIdClient(Client idClient) {
-        this.idClient = idClient;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setIdEmploye(Employe idEmploye) {
-        this.idEmploye = idEmploye;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public void setIdMedium(Medium idMedium) {
-        this.idMedium = idMedium;
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 
-   
-    public SeanceVoyance() {
-    }
-
-
-    public void ajout_commentaire(String note) {
-        this.commentaire = note;
-    }
-
-    public void fin_seance() {
-        this.fin = Calendar.getInstance().getTimeZone();
-        this.enCours = false;
+    public void setMedium(Medium medium) {
+        this.medium = medium;
     }
 
     @Override
     public String toString() {
-        return "SeanceVoyance{" + "id=" + id + ", debut=" + debut + ", fin=" + fin + ", enCours=" + enCours + ", commentaire=" + commentaire + ", idClient=" + idClient + ", idEmploye=" + idEmploye + ", idMedium=" + idMedium + '}';
+        return "SeanceVoyance{" + "id=" + id + ", debut=" + debut + ", fin=" + fin + ", enCours=" + enCours + ", commentaire=" + commentaire + ", client=" + client + ", employe=" + employe + ", medium=" + medium + '}';
     }
+
 
 
     
