@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -28,14 +29,15 @@ public class SeanceVoyance implements Serializable {
     private TimeZone fin;
     private Boolean enCours;
     private String commentaire;
+    
+    @ManyToOne
+    private Client idClient;
+    @ManyToOne
+    private Employe idEmploye;
+    @ManyToOne
+    private Medium idMedium;    
 
-    private long idClient;
-
-    private long idEmploye;
-
-    private long idMedium;    
-
-    public SeanceVoyance(TimeZone debut, TimeZone fin, Boolean enCours, String commentaire, long idClient, long idEmploye, long idMedium) {
+    public SeanceVoyance(TimeZone debut, TimeZone fin, Boolean enCours, String commentaire, Client idClient, Employe idEmploye, Medium idMedium) {
         this.debut = debut;
         this.fin = fin;
         this.enCours = enCours;
@@ -45,11 +47,13 @@ public class SeanceVoyance implements Serializable {
         this.idMedium = idMedium;
     }
 
+
+
     public SeanceVoyance(TimeZone debut, Client client, Employe employe, Medium medium) {
         this.debut = debut;
-        this.idClient = client.getId();
-        this.idEmploye = employe.getId();
-        this.idMedium = medium.getId();
+        this.idClient = client;
+        this.idEmploye = employe;
+        this.idMedium = medium;
         this.enCours = true;
     }
     
@@ -79,17 +83,18 @@ public class SeanceVoyance implements Serializable {
         return commentaire;
     }
 
-    public long getIdClient() {
+    public Client getIdClient() {
         return idClient;
     }
 
-    public long getIdEmploye() {
+    public Employe getIdEmploye() {
         return idEmploye;
     }
 
-    public long getIdMedium() {
+    public Medium getIdMedium() {
         return idMedium;
     }
+
 
 
 
@@ -109,32 +114,16 @@ public class SeanceVoyance implements Serializable {
         this.commentaire = commentaire;
     }
 
-    public void setIdClient(long idClient) {
+    public void setIdClient(Client idClient) {
         this.idClient = idClient;
     }
 
-    public void setIdEmploye(long idEmploye) {
+    public void setIdEmploye(Employe idEmploye) {
         this.idEmploye = idEmploye;
     }
 
-    public void setIdMedium(long idMedium) {
+    public void setIdMedium(Medium idMedium) {
         this.idMedium = idMedium;
-    }
-
-        
-    public void addClient(Client client){
-         this.idClient = client.getId();       
-        
-    }
-         
-    public void addMedium(Medium medium){
-         this.idClient = medium.getId();       
-        
-    }
-
-    public void addEmploye(Employe employe){
-         this.idClient = employe.getId();       
-        
     }
 
    

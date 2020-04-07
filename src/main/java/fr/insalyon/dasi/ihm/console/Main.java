@@ -28,7 +28,8 @@ public class Main {
     public static void main(String[] args) {
          
         JpaUtil.init();
-                
+        
+        /** tests de création d'objets **/
         Calendar aujourdhui = Calendar.getInstance(); 
         
         Medium aurel = new Spirite("jsp", "bgdlacalle", "boulecristale","nom", "prenom", "sexe");
@@ -48,11 +49,10 @@ public class Main {
         
         Client Mario = new Client( "G", "mario", aujourdhui, "bouh", "aaah", 123456789, "MotDePasse","cancer", "mario","mario", "blanc cassé");
        
-        SeanceVoyance voy1 = new SeanceVoyance(heure, heure, false, "commentaire", 123, 22, 22);
-
         Client Matteo = new Client( "dumont", "mateeo", aujourdhui, "iii", "eee", 123456789, "MotDePasse","cancer", "mateo","mateo", "blanc cassé");
        
 
+        /** test des services en cours de dev**/
         Service service = new Service();
 
         service.inscrireClient(Matteo);
