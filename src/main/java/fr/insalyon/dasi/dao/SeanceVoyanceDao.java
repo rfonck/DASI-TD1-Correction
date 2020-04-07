@@ -23,7 +23,7 @@ public class SeanceVoyanceDao {
     
     public List<SeanceVoyance> listerSeanceVoyance() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<SeanceVoyance> query = em.createQuery("SELECT * FROM ROUTE.SEANCEVOYANCE", SeanceVoyance.class);
+        TypedQuery<SeanceVoyance> query = em.createQuery("SELECT c FROM SeanceVoyance c ORDER BY c.nom ASC, c.prenom ASC", SeanceVoyance.class);
         return query.getResultList();
     }
     

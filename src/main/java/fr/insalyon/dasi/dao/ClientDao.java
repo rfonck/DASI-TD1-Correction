@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
  *
  * @author DASI Team
  */
+
 public class ClientDao {
     
     public void creer(Client client) {
@@ -35,7 +36,7 @@ public class ClientDao {
     
     public List<Client> listerClients() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Client> query = em.createQuery("SELECT * FROM ROUTE.UTILISATEUR inner join ROUTE.CLIENT on ROUTE.UTILISATEUR.ID =  ROUTE.CLIENT.ID ORDER BY c.nom ASC, c.prenom ASC", Client.class);
+        TypedQuery<Client> query = em.createQuery("SELECT c FROM utilisateur c ORDER BY c.nom ASC, c.prenom ASC", Client.class);
         return query.getResultList();
     }
     

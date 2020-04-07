@@ -71,7 +71,7 @@ public class Main {
         System.out.println("-> " + emplo.toString());
         
         Calendar debut = Calendar.getInstance();
-        SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", iencli, emplo, astro);
+        SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
         
         service.inscrireSeanceVoyance(seance);
         System.out.println("-> " + seance.toString()); 
