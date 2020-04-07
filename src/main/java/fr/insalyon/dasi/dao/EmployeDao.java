@@ -23,7 +23,7 @@ public class EmployeDao {
     
     public Employe chercherParMail(String employeMail) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Employe> query = em.createQuery("SELECT * FROM ROUTE.UTILISATEUR inner join ROUTE.EMPLOYE on ROUTE.UTILISATEUR.ID =  ROUTE.EMPLOYE.ID where email = :mail", Employe.class);
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Utilisateur c WHERE c.email = :mail", Employe.class);
         query.setParameter("mail", employeMail); // correspond au paramètre ":mail" dans la requête
         List<Employe> employes = query.getResultList();
         Employe result = null;

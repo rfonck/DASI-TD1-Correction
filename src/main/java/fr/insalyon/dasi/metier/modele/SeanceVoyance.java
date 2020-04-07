@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -24,9 +25,11 @@ public class SeanceVoyance implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private TimeZone debut;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Calendar debut;
     
-    private TimeZone fin;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Calendar fin;
     private Boolean enCours;
     private String commentaire;
     
@@ -37,7 +40,7 @@ public class SeanceVoyance implements Serializable {
     @ManyToOne
     private Medium medium;    
 
-    public SeanceVoyance(TimeZone debut, TimeZone fin, Boolean enCours, String commentaire, Client client, Employe employe, Medium medium) {
+    public SeanceVoyance(Calendar debut, Calendar fin, Boolean enCours, String commentaire, Client client, Employe employe, Medium medium) {
         this.debut = debut;
         this.fin = fin;
         this.enCours = enCours;
@@ -47,7 +50,9 @@ public class SeanceVoyance implements Serializable {
         this.medium = medium;
     }
 
-    public SeanceVoyance(TimeZone debut, Client client, Employe employe, Medium medium) {
+
+
+    public SeanceVoyance(Calendar debut, Client client, Employe employe, Medium medium) {
         this.debut = debut;
         this.client = client;
         this.employe = employe;
@@ -57,28 +62,23 @@ public class SeanceVoyance implements Serializable {
     
     public void FinaliserSeance (String commentaire){
         this.commentaire  = commentaire;
-        this.fin = Calendar.getInstance().getTimeZone(); 
+        this.fin = Calendar.getInstance(); 
         this.enCours = false;   
     }
     
        
     public SeanceVoyance() {
     }
-
-    public void fin_seance() {
-        this.fin = Calendar.getInstance().getTimeZone();
-        this.enCours = false;
-    }
     
     public Long getId() {
         return id;
     }
 
-    public TimeZone getDebut() {
+    public Calendar getDebut() {
         return debut;
     }
 
-    public TimeZone getFin() {
+    public Calendar getFin() {
         return fin;
     }
 
@@ -104,11 +104,11 @@ public class SeanceVoyance implements Serializable {
 
 
 
-    public void setDebut(TimeZone debut) {
+    public void setDebut(Calendar debut) {
         this.debut = debut;
     }
 
-    public void setFin(TimeZone fin) {
+    public void setFin(Calendar fin) {
         this.fin = fin;
     }
 

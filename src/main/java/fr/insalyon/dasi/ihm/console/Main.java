@@ -59,14 +59,22 @@ public class Main {
         service.inscrireEmploye(thomas);
         service.creerMedium(jj);
         
-        Client iencli = service.rechercherClientParMail("eee");
+        long bite  = 1;
+        
+        Client iencli = service.rechercherClientParId(bite);
+        Client client = service.rechercherClientParMail("eee");       
         Employe emplo = service.rechercherEmployeParMail("Email");
         Astrologue astro = service.rechercherAstrologueParNom("nom");
+
+        System.out.println("-> " + iencli.toString());     
+        System.out.println("-> " + client.toString());
+        System.out.println("-> " + emplo.toString());
         
-        TimeZone debut = Calendar.getInstance().getTimeZone();
+        Calendar debut = Calendar.getInstance();
         SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", iencli, emplo, astro);
-        service.inscrireSeanceVoyance(seance);
         
+        service.inscrireSeanceVoyance(seance);
+        System.out.println("-> " + seance.toString()); 
         JpaUtil.destroy();
   
       
