@@ -4,12 +4,12 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-06T21:15:23")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2020-04-07T09:02:56")
 @StaticMetamodel(Employe.class)
 public class Employe_ extends Utilisateur_ {
 
-    public static volatile SingularAttribute<Employe, Boolean> ConsultationEnCours;
-    public static volatile SingularAttribute<Employe, Integer> NombreSeance;
-    public static volatile SingularAttribute<Employe, String> Genre;
+    public static volatile SingularAttribute<Employe, String> genre;
+    public static volatile SingularAttribute<Employe, Integer> nombreSeance;
+    public static volatile SingularAttribute<Employe, Boolean> consultationEnCours;
 
 }

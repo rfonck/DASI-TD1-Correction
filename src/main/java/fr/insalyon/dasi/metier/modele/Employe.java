@@ -4,12 +4,8 @@
  * and open the template in the editor.
  */
 package fr.insalyon.dasi.metier.modele;
-
-import fr.insalyon.dasi.metier.modele.Utilisateur;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 /**
  *
@@ -18,109 +14,108 @@ import javax.persistence.Entity;
 @Entity
 public class Employe extends Utilisateur implements Serializable {
     
-    private  String Genre;
-    private boolean ConsultationEnCours;
-    private  int NombreSeance;
+    private  String genre;
+    private boolean consultationEnCours;
+    private  int nombreSeance;
 
     public Employe() {
     }
 
-    public Employe(String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String Genre, boolean ConsultationEnCours, int NombreSeance) {
+    public Employe(String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String genre, boolean consultationEnCours, int nombreSeance) {
         super(Nom, Prenom, DateNaissance, Adresse, Email, NumTel, MotDePasse);
-        this.Genre = Genre;
-        this.ConsultationEnCours = ConsultationEnCours;
-        this.NombreSeance = NombreSeance;
+        this.genre = genre;
+        this.consultationEnCours = consultationEnCours;
+        this.nombreSeance = nombreSeance;
     }
 
 
-    public String getGenre() {
-        return Genre;
+    public String getgenre() {
+        return genre;
     }
 
-    public boolean isConsultationEnCours() {
-        return ConsultationEnCours;
+    public boolean isconsultationEnCours() {
+        return consultationEnCours;
     }
 
-    public int getNombreSeance() {
-        return NombreSeance;
+    public int getnombreSeance() {
+        return nombreSeance;
     }
-    @Override
+
     public Long getId() {
-        return Id;
+        return id;
     }
-    @Override
+
     public String getNom() {
-        return Nom;
+        return nom;
     }
-    @Override
+
     public String getPrenom() {
-        return Prenom;
+        return prenom;
     }
-    @Override
+
     public Calendar getDateNaissance() {
-        return DateNaissance;
+        return dateNaissance;
     }
-    @Override
+
     public String getAdresse() {
-        return Adresse;
+        return adresse;
     }
-    @Override
+
     public String getEmail() {
-        return Email;
+        return email;
     }
-    @Override
+
     public int getNumTel() {
-        return NumTel;
+        return numTel;
     }
 
-    @Override
     public String getMotDePasse() {
-        return MotDePasse;
+        return motDePasse;
     }
 
-    public void setGenre(String Genre) {
-        this.Genre = Genre;
+    public void setgenre(String genre) {
+        this.genre = genre;
     }
 
-    public void setConsultationEnCours(boolean ConsultationEnCours) {
-        this.ConsultationEnCours = ConsultationEnCours;
+    public void setconsultationEnCours(boolean consultationEnCours) {
+        this.consultationEnCours = consultationEnCours;
     }
 
-    public void setNombreSeance(int NombreSeance) {
-        this.NombreSeance = NombreSeance;
+    public void setnombreSeance(int nombreSeance) {
+        this.nombreSeance = nombreSeance;
     }
-    @Override
+
     public void setNom(String Nom) {
-        this.Nom = Nom;
+        this.nom = nom;
     }
-    @Override
+
     public void setPrenom(String Prenom) {
-        this.Prenom = Prenom;
+        this.prenom = Prenom;
     }
-    @Override
+
     public void setDateNaissance(Calendar DateNaissance) {
-        this.DateNaissance = DateNaissance;
+        this.dateNaissance = DateNaissance;
     }
-    @Override
+
     public void setAdresse(String Adresse) {
-        this.Adresse = Adresse;
+        this.adresse = Adresse;
     }
-    @Override
+
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
-    @Override
+
     public void setNumTel(int NumTel) {
-        this.NumTel = NumTel;
+        this.numTel = NumTel;
     }
-    @Override
+  
     public void setMotDePasse(String MotDePasse) {
-        this.MotDePasse = MotDePasse;
+        this.motDePasse = MotDePasse;
     }
 
     @Override
     public String toString() {
-        return "Employe{" + "Genre=" + Genre + ", ConsultationEnCours=" + ConsultationEnCours + ", NombreSeance=" + NombreSeance + '}';
+        return "Employe{" + "genre=" + genre + ", consultationEnCours=" + consultationEnCours + ", nombreSeance=" + nombreSeance + '}';
     }
 
 }

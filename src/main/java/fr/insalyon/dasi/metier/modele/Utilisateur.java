@@ -7,8 +7,6 @@ package fr.insalyon.dasi.metier.modele;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,92 +25,92 @@ public  class Utilisateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    protected Long Id;
-    protected String Nom;
-    protected String Prenom;
+    protected Long id;
+    protected String nom;
+    protected String prenom;
     @Temporal(javax.persistence.TemporalType.DATE)
-    protected Calendar DateNaissance;
-    protected String Adresse;
-    protected String Email;
-    protected int NumTel;
-    protected String MotDePasse;
+    protected Calendar dateNaissance;
+    protected String adresse;
+    protected String email;
+    protected int numTel;
+    protected String motDePasse;
 
     public Utilisateur() {
     }
 
-    public Utilisateur( String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse) {
-        this.Nom = Nom;
-        this.Prenom = Prenom;
-        this.DateNaissance = DateNaissance;
-        this.Adresse = Adresse;
-        this.Email = Email;
-        this.NumTel = NumTel;
-        this.MotDePasse = MotDePasse;
+    public Utilisateur( String nom, String prenom, Calendar dateNaissance, String adresse, String email, int numTel, String motDePasse) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.adresse = adresse;
+        this.email = email;
+        this.numTel = numTel;
+        this.motDePasse = motDePasse;
     }
 
-    public Long getId() {
-        return Id;
+    public Long getid() {
+        return id;
     }
 
-    public String getNom() {
-        return Nom;
+    public String getnom() {
+        return nom;
     }
 
-    public String getPrenom() {
-        return Prenom;
+    public String getprenom() {
+        return prenom;
     }
 
-    public Calendar getDateNaissance() {
-        return DateNaissance;
+    public Calendar getdateNaissance() {
+        return dateNaissance;
     }
 
-    public String getAdresse() {
-        return Adresse;
+    public String getadresse() {
+        return adresse;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getemail() {
+        return email;
     }
 
-    public int getNumTel() {
-        return NumTel;
+    public int getnumTel() {
+        return numTel;
     }
 
-    public String getMotDePasse() {
-        return MotDePasse;
+    public String getmotDePasse() {
+        return motDePasse;
     }
 
-    public void setNom(String Nom) {
-        this.Nom = Nom;
+    public void setnom(String nom) {
+        this.nom = nom;
     }
 
-    public void setPrenom(String Prenom) {
-        this.Prenom = Prenom;
+    public void setprenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    public void setDateNaissance(Calendar DateNaissance) {
-        this.DateNaissance = DateNaissance;
+    public void setdateNaissance(Calendar dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
-    public void setAdresse(String Adresse) {
-        this.Adresse = Adresse;
+    public void setadresse(String adresse) {
+        this.adresse = adresse;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setemail(String email) {
+        this.email = email;
     }
 
-    public void setNumTel(int NumTel) {
-        this.NumTel = NumTel;
+    public void setnumTel(int numTel) {
+        this.numTel = numTel;
     }
 
-    public void setMotDePasse(String MotDePasse) {
-        this.MotDePasse = MotDePasse;
+    public void setmotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
     
     @Override
     public String toString() {
-        return "Utilisateur{" + "Id=" + Id + ", Nom=" + Nom + ", Prenom=" + Prenom + ", DateNaissance=" + DateNaissance + ", Adresse=" + Adresse + ", Email=" + Email + ", NumTel=" + NumTel + ", MotDePasse=" + MotDePasse + '}';
+        return "Utilisateur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", adresse=" + adresse + ", email=" + email + ", numTel=" + numTel + ", motDePasse=" + motDePasse + '}';
     }
     
     

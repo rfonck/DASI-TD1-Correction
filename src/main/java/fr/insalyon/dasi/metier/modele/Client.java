@@ -3,7 +3,6 @@ package fr.insalyon.dasi.metier.modele;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Entity;
-import java.util.Date;
 
 /**
  *
@@ -28,7 +27,7 @@ public class Client extends Utilisateur implements Serializable {
     }
 
     public void setId(Long Id) {
-        this.Id = Id;
+        this.id = Id;
     }
         
     public void setSigneAstrologique(String signeAstrologique) {
@@ -47,33 +46,32 @@ public class Client extends Utilisateur implements Serializable {
         this.couleurBonheur = couleurBonheur;
     }
     
-    @Override
     public void setNom(String Nom) {
-        this.Nom = Nom;
+        this.nom = Nom;
     }
-    @Override
+
     public void setPrenom(String Prenom) {
-        this.Prenom = Prenom;
+        this.prenom = Prenom;
     }
-    @Override
+
     public void setDateNaissance(Calendar DateNaissance) {
-        this.DateNaissance = DateNaissance;
+        this.dateNaissance = DateNaissance;
     }
-    @Override
+
     public void setAdresse(String Adresse) {
-        this.Adresse = Adresse;
+        this.adresse = Adresse;
     }
-    @Override
+
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
-    @Override
+
     public void setNumTel(int NumTel) {
-        this.NumTel = NumTel;
+        this.numTel = NumTel;
     }
-    @Override
+
     public void setMotDePasse(String MotDePasse) {
-        this.MotDePasse = MotDePasse;
+        this.motDePasse = MotDePasse;
     }
 
     public String getSigneAstrologique() {
@@ -92,42 +90,41 @@ public class Client extends Utilisateur implements Serializable {
         return couleurBonheur;
     }
 
-    @Override
+
     public Long getId() {
-        return Id;
+        return id;
     }
     
-    @Override
+
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
-    @Override
+
     public String getPrenom() {
-        return Prenom;
+        return prenom;
     }
     
-    @Override
+
     public Calendar getDateNaissance() {
-        return DateNaissance;
+        return dateNaissance;
     }
     
-    @Override
+
     public String getAdresse() {
-        return Adresse;
+        return adresse;
     }
-    @Override
+
     public String getEmail() {
-        return Email;
+        return email;
     }
     
-    @Override
     public int getNumTel() {
-        return NumTel;
+        return numTel;
     }
-    @Override
+
     public String getMotDePasse() {
-        return MotDePasse;
+        return motDePasse;
     }
 
     public Client() {

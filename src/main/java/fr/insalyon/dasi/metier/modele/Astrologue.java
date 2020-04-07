@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package fr.insalyon.dasi.metier.modele;
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 
