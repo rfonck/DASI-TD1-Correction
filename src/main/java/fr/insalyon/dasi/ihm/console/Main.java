@@ -30,6 +30,7 @@ public class Main {
         JpaUtil.init();
         
         /** tests de création d'objets **/
+        System.out.println("-------- tests de création d'objets -------- " );
         Calendar aujourdhui = Calendar.getInstance(); 
         
         Medium aurel = new Spirite("jsp", "bgdlacalle", "boulecristale","nom", "prenom", "sexe");       
@@ -51,7 +52,10 @@ public class Main {
         Client Matteo = new Client( "dumont", "mateeo", aujourdhui, "iii", "eee", 123456789, "MotDePasse","cancer", "mateo","mateo", "blanc cassé");
        
 
-        /** test des services en cours de dev**/
+        /** test de services **/
+        System.out.println("-------- test de services -------- " );
+        
+        
         Service service = new Service();
 
         service.inscrireClient(Matteo);
@@ -63,11 +67,12 @@ public class Main {
         long bite  = 1;
         
         Client iencli = service.rechercherClientParId(bite);
-        Client client = service.rechercherClientParMail("Email");       
+        Client client = service.rechercherClientParMail("eee");       
         Employe emplo = service.rechercherEmployeParMail("Email");
         Astrologue astro = service.chercherAstrologueParId(bite);
      
         //test de création et persistance d'objets
+        System.out.println("-------- test de création et persistance d'objets -------- " );
         
         Calendar debut = Calendar.getInstance();
         SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
@@ -75,7 +80,7 @@ public class Main {
         service.inscrireSeanceVoyance(seance); 
         
         //test d'authentification et connexion
-        
+        System.out.println("-------- test d'authentification et connexion -------- " );
         
         String username = "Email";
         String motdePasse = "MotDePasse";
@@ -94,12 +99,19 @@ public class Main {
         }
         
         //test de listage de medium 
-        
+        System.out.println("-------- test de listage de medium  -------- " );        
         List<Medium> listeCharlo = service.listerMedium();
         for(int i=0; i< listeCharlo.size(); i++ ){
             System.out.println("-> " + listeCharlo.get(i).toString()); 
         }
-            
+        
+        
+        //test de l'historique des voyances d'un utilisateur 
+        System.out.println("-------- test de l'historique des voyances d'un utilisateur   -------- " );  
+        List<SeanceVoyance> musolini = service.ConsulterHistoriqueSeances(client);
+        for(int i=0; i< musolini.size(); i++ ){
+            System.out.println("-> " + musolini.get(i).toString()); 
+        }
         
         JpaUtil.destroy();
         

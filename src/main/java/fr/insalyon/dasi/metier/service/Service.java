@@ -234,7 +234,7 @@ Sinon on renvoie un NULL **/
             }
             
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service authentifierClient(mail,motDePasse)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service identifierUtilisateur(mail,motDePasse)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -266,7 +266,7 @@ Il renvoie ensuite cet objet.
                 }
             }
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service authentifierClient(mail,motDePasse)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service connecterClient(mail,motDePasse)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -297,7 +297,7 @@ Algorithme : Ce service réalise une sélection sur la table contenant les emplo
                 }
             }
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service authentifierClient(mail,motDePasse)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service connecterEmploye(mail,motDePasse)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -342,9 +342,26 @@ Ce sont des objets dont les données sont stockées dans la base de donnée du s
 description : Cette fonction fournit l’historique des consultations du client passé en paramètre.
 
 Algorithme : Ce service effectue une sélection dans la base de donnée de toutes les séances dont le client est celui passé en paramètre. On crée ensuite une liste d’objets “seanceVoyance” que l’on renvoie. 
-
-
-
+**/
+    public List<SeanceVoyance> ConsulterHistoriqueSeances(Client client) {
+        List<SeanceVoyance> resultat = null;
+        long id  = client.getId();
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = SeanceVoyanceDao.listerSeanceVoyanceParClient(client);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service ConsulterHistoriqueSeances", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    
+    
+    
+/**
 Service : soliciterMedium(médium X, employe e)
 
 description : Cette fonction permet de chercher l’employé le plus apte à faire la consultation. Renvoie un objet de type employé.
