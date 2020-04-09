@@ -115,7 +115,7 @@ public class Employe extends Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "Employe{" + "genre=" + genre + ", consultationEnCours=" + consultationEnCours + ", nombreSeance=" + nombreSeance + '}';
+        return super.toString()+ "Employe{" + "genre=" + genre + ", consultationEnCours=" + consultationEnCours + ", nombreSeance=" + nombreSeance + '}';
     }
 
 }

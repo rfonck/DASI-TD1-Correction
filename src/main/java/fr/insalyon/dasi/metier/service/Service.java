@@ -343,6 +343,7 @@ description : Cette fonction fournit l’historique des consultations du client 
 
 Algorithme : Ce service effectue une sélection dans la base de donnée de toutes les séances dont le client est celui passé en paramètre. On crée ensuite une liste d’objets “seanceVoyance” que l’on renvoie. 
 **/
+    
     public List<SeanceVoyance> ConsulterHistoriqueSeances(Client client) {
         List<SeanceVoyance> resultat = null;
         long id  = client.getId();

@@ -36,5 +36,19 @@ public class SeanceVoyanceDao {
         query.setParameter("clt", client);
         return query.getResultList();
     }
+
+    static public List<SeanceVoyance> listerSeanceVoyanceParEmploye(Employe employe) {
+    EntityManager em = JpaUtil.obtenirContextePersistance();
+    TypedQuery<SeanceVoyance> query = em.createQuery("SELECT c FROM SeanceVoyance c WHERE c.employe = :employe", SeanceVoyance.class);
+    query.setParameter("employe", employe);
+    return query.getResultList();
+    }
+    
+    static public List<SeanceVoyance> listerSeanceVoyanceParMedium(Medium medium) {
+    EntityManager em = JpaUtil.obtenirContextePersistance();
+    TypedQuery<SeanceVoyance> query = em.createQuery("SELECT c FROM SeanceVoyance c WHERE c.medium = :medium", SeanceVoyance.class);
+    query.setParameter("medium", medium);
+    return query.getResultList();
+    }
     // modifier / supprimer  ... 
 }
