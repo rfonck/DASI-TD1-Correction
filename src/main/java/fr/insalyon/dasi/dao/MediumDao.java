@@ -6,6 +6,7 @@ import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.Spirite;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -89,7 +90,9 @@ public class MediumDao {
     
     public List<Medium> listerMediums() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Medium> query = em.createQuery("SELECT m FROM medium m ", Medium.class);
+        String ordre = "SELECT m FROM Medium m ";
+        Query query = em.createQuery(ordre);
+        List<Medium> lst = query.getResultList();
         return query.getResultList();
     }
     

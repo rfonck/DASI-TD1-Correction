@@ -34,6 +34,8 @@ public class Main {
         
         Medium aurel = new Spirite("jsp", "bgdlacalle", "boulecristale","nom", "prenom", "sexe");       
 
+        Medium romain = new Medium("nom", "prenom", "sexe");
+        
         Medium jj = new Astrologue("charlatan", "jsp", "bgdlacalle", "boulecristale", "nom", "prenom", "sexe");   
         
         Medium bastien = new Cartomancien( "bgdlacalle", "cartes", "nom", "prenom", "sexe");  
@@ -55,6 +57,7 @@ public class Main {
         service.inscrireClient(Matteo);
         service.inscrireEmploye(thomas);
         service.creerMedium(jj);
+        service.creerMedium(romain);
         service.creerMedium(bastien);
         service.creerMedium(aurel);        
         long bite  = 1;
@@ -64,11 +67,15 @@ public class Main {
         Employe emplo = service.rechercherEmployeParMail("Email");
         Astrologue astro = service.chercherAstrologueParId(bite);
      
+        //test de création et persistance d'objets
         
         Calendar debut = Calendar.getInstance();
         SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
         
         service.inscrireSeanceVoyance(seance); 
+        
+        //test d'authentification et connexion
+        
         
         String username = "Email";
         String motdePasse = "MotDePasse";
@@ -86,8 +93,14 @@ public class Main {
             System.out.println("-> " + hello.toString());  
         }
         
+        //test de listage de medium 
         
-
+        List<Medium> listeCharlo = service.listerMedium();
+        for(int i=0; i< listeCharlo.size(); i++ ){
+            System.out.println("-> " + listeCharlo.get(i).toString()); 
+        }
+            
+        
         JpaUtil.destroy();
         
 

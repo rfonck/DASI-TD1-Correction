@@ -10,6 +10,7 @@ import fr.insalyon.dasi.metier.modele.Client;
 import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.Spirite;
+import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.SeanceVoyance;
 import java.util.List;
 import java.util.logging.Level;
@@ -309,22 +310,23 @@ Algorithme : Ce service réalise une sélection sur la table contenant les emplo
 Service :  consulterListeMedium()
 
 
-description :  Ce service permet de récupérer une liste contenant tous les médiums de la base de donnée et leurs caractéristiques.
+description :  Ce service permet de récupérer une liste contenant tous les médiums de la base de donnée et leurs caractéristiques.Algorithme : Cet algorithme renvoie une liste complète d’objets “medium”.
 
-Algorithme : Cet algorithme renvoie une liste complète d’objets “medium”. Ce sont des objets dont les données sont stockées dans la base de donnée du serveur.
+Ce sont des objets dont les données sont stockées dans la base de donnée du serveur.
 
 
 * 
-* 
+     * @return 
+**/
     public List<Medium> listerMedium() {
         List<Medium> resultat = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat.addALL(mediumDao.listerAstrologue());
-            resultat.addALL(mediumDao.listerSpirite());
-            resultat.addALL(mediumDao.listerCartomancien());
+            resultat = mediumDao.listerMediums();
+           
+            
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerClients()", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerMediums()", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -334,7 +336,7 @@ Algorithme : Cet algorithme renvoie une liste complète d’objets “medium”.
    
 
 
-    
+    /**
     Service :  consulterHistoriqueSeances(Client client)
 
 description : Cette fonction fournit l’historique des consultations du client passé en paramètre.
