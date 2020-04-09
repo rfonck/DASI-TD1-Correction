@@ -59,8 +59,8 @@ public class MediumDao {
     
         public Astrologue chercherParNomAstrologue(String nom) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Astrologue> query = em.createQuery("SELECT * FROM ROUTE.MEDIUM inner join ROUTE.ASTROLOGUE on ROUTE.MEDIUM.ID =  ROUTE.ASTROLOGUE.ID where email = :mail", Astrologue.class);
-        query.setParameter("mail", nom); // correspond au paramètre ":mail" dans la requête
+        TypedQuery<Astrologue> query = em.createQuery("SELECT a FROM Utilisateur a WHERE a.nom = :nom", Astrologue.class);
+        query.setParameter("nom", nom); // correspond au paramètre ":mail" dans la requête
         List<Astrologue> clients = query.getResultList();
         Astrologue result = null;
         if (!clients.isEmpty()) {
@@ -71,25 +71,25 @@ public class MediumDao {
     
     public List<Astrologue> listerAstrologue() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Astrologue> query = em.createQuery("SELECT * FROM ROUTE.Astrologue", Astrologue.class);
+        TypedQuery<Astrologue> query = em.createQuery("SELECT m FROM Astrologue m ", Astrologue.class);
         return query.getResultList();
     }
     
     public List<Cartomancien> listerCartomancien() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Cartomancien> query = em.createQuery("SELECT * FROM ROUTE.Cartomancien", Cartomancien.class);
+        TypedQuery<Cartomancien> query = em.createQuery("SELECT m FROM Cartomancien m", Cartomancien.class);
         return query.getResultList();
     }
     
     public List<Spirite> listerSpirite() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Spirite> query = em.createQuery("SELECT * FROM ROUTE.Spirite", Spirite.class);
+        TypedQuery<Spirite> query = em.createQuery("SELECT m FROM Spirite m ", Spirite.class);
         return query.getResultList();
     }    
     
     public List<Medium> listerMediums() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Medium> query = em.createQuery("SELECT * FROM ROUTE.Medium", Medium.class);
+        TypedQuery<Medium> query = em.createQuery("SELECT m FROM medium m ", Medium.class);
         return query.getResultList();
     }
     

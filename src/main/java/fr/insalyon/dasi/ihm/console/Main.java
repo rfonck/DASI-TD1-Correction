@@ -32,14 +32,11 @@ public class Main {
         /** tests de création d'objets **/
         Calendar aujourdhui = Calendar.getInstance(); 
         
-        Medium aurel = new Spirite("jsp", "bgdlacalle", "boulecristale","nom", "prenom", "sexe");
-        System.out.println("-> " + aurel.toString());        
+        Medium aurel = new Spirite("jsp", "bgdlacalle", "boulecristale","nom", "prenom", "sexe");       
 
-        Medium jj = new Astrologue("charlatan", "jsp", "bgdlacalle", "boulecristale", "nom", "prenom", "sexe");
-        System.out.println("-> " + jj.toString());   
+        Medium jj = new Astrologue("charlatan", "jsp", "bgdlacalle", "boulecristale", "nom", "prenom", "sexe");   
         
-        Medium bastien = new Cartomancien( "bgdlacalle", "cartes", "nom", "prenom", "sexe");
-        System.out.println("-> " + bastien.toString());   
+        Medium bastien = new Cartomancien( "bgdlacalle", "cartes", "nom", "prenom", "sexe");  
          
         TimeZone heure = aujourdhui.getTimeZone();
         
@@ -58,26 +55,42 @@ public class Main {
         service.inscrireClient(Matteo);
         service.inscrireEmploye(thomas);
         service.creerMedium(jj);
-        
+        service.creerMedium(bastien);
+        service.creerMedium(aurel);        
         long bite  = 1;
         
         Client iencli = service.rechercherClientParId(bite);
-        Client client = service.rechercherClientParMail("eee");       
+        Client client = service.rechercherClientParMail("Email");       
         Employe emplo = service.rechercherEmployeParMail("Email");
-        Astrologue astro = service.rechercherAstrologueParNom("nom");
-
-        System.out.println("-> " + iencli.toString());     
-        System.out.println("-> " + client.toString());
-        System.out.println("-> " + emplo.toString());
+        Astrologue astro = service.chercherAstrologueParId(bite);
+     
         
         Calendar debut = Calendar.getInstance();
         SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
         
-        service.inscrireSeanceVoyance(seance);
-        System.out.println("-> " + seance.toString()); 
+        service.inscrireSeanceVoyance(seance); 
+        
+        String username = "Email";
+        String motdePasse = "MotDePasse";
+        
+        String un = service.identifierUtilisateur(username, motdePasse);
+        System.out.println("-> " + un);
+        if(un.equals("client")){
+            Client hello = service.connecterClient(username, motdePasse);
+            System.out.println("-> " + hello.toString());
+            
+            
+        }
+        else if(un.equals("employe")){
+            Employe hello = service.connecterEmploye(username, motdePasse);
+            System.out.println("-> " + hello.toString());  
+        }
+        
+        
+
         JpaUtil.destroy();
-  
-      
+        
+
         
     }
 }
