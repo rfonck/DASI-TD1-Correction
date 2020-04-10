@@ -173,13 +173,13 @@ public class Service {
     /**
      * Service :  inscrireClient(Client nouveauClient)
 
-description : Ce service va inscrire un client dans la base de donnée à partir des informations fournies.
-
-Algorithme : On vérifie d’abord que les informations transmises sont correctes (numéro de téléphone répondant aux standards, email valide, date de naissance vraisemblable)
+description : Ce service va inscrire un client dans la base de donnée à partir des informations fournies.Algorithme : On vérifie d’abord que les informations transmises sont correctes (numéro de téléphone répondant aux standards, email valide, date de naissance vraisemblable)
  
-Si les vérifications sont passées avec succès, on inscrit le nouveau client dans la base de donnée. On renvoie alors un booléen true.
+Si les vérifications sont passées avec succès, on inscrit le nouveau client dans la base de donnée.On renvoie alors un booléen true.
 
-Sinon on renvoie un booléen false.**/
+Sinon on renvoie un booléen false.
+     * @param client
+     * @return */
     
         public Long inscrireClient(Client client) {
         Long resultat = null;
@@ -203,12 +203,11 @@ Sinon on renvoie un booléen false.**/
 
 Service :  identifierUtilisateur(String email, string motDePasse)
 
-description : Ce service identifie un utilisateur à partir de l’adresse mail et du mot de passe passés en paramètre. Il différencie les employés et les clients. 
-
-Algorithme : On vérifie si l’adresse mail et le mot de passe sont associé à un utilisateur. 
-
-Si un utilisateur existe on renvoie son type (String)
-Sinon on renvoie un NULL **/
+description : Ce service identifie un utilisateur à partir de l’adresse mail et du mot de passe passés en paramètre.Il différencie les employés et les clients.Algorithme : On vérifie si l’adresse mail et le mot de passe sont associé à un utilisateur.Si un utilisateur existe on renvoie son type (String)
+Sinon on renvoie un NULL
+     * @param mail
+     * @param motDePasse
+     * @return  **/
         
         
     public String identifierUtilisateur(String mail, String motDePasse) {
@@ -280,9 +279,12 @@ Il renvoie ensuite cet objet.
     /**
 Service : connecterClient(String email, string motDePasse)
 
-description : Renvoie l’employé associé à l’adresse mail et au mot de passe.
+description : Renvoie l’employé associé à l’adresse mail et au mot de passe.Algorithme : Ce service réalise une sélection sur la table contenant les employés.Les contraintes sur la table imposent qu’un seul tuple sera retourné.Le service réalise un objet employe grâce aux données récupérées.
 
-Algorithme : Ce service réalise une sélection sur la table contenant les employés. Les contraintes sur la table imposent qu’un seul tuple sera retourné. Le service réalise un objet employe grâce aux données récupérées. Il renvoie ensuite cet objet.  
+Il renvoie ensuite cet objet.  
+     * @param mail
+     * @param motDePasse
+     * @return 
 **/
     public Employe connecterEmploye(String mail, String motDePasse) {
         Employe resultat = null;
@@ -339,9 +341,10 @@ Ce sont des objets dont les données sont stockées dans la base de donnée du s
     /**
     Service :  consulterHistoriqueSeances(Client client)
 
-description : Cette fonction fournit l’historique des consultations du client passé en paramètre.
-
-Algorithme : Ce service effectue une sélection dans la base de donnée de toutes les séances dont le client est celui passé en paramètre. On crée ensuite une liste d’objets “seanceVoyance” que l’on renvoie. 
+description : Cette fonction fournit l’historique des consultations du client passé en paramètre.Algorithme : Ce service effectue une sélection dans la base de donnée de toutes les séances dont le client est celui passé en paramètre.On crée ensuite une liste d’objets “seanceVoyance” que l’on renvoie.
+  
+     * @param client
+     * @return 
 **/
     
     public List<SeanceVoyance> ConsulterHistoriqueSeances(Client client) {
@@ -365,13 +368,28 @@ Algorithme : Ce service effectue une sélection dans la base de donnée de toute
 /**
 Service : soliciterMedium(médium X, employe e)
 
-description : Cette fonction permet de chercher l’employé le plus apte à faire la consultation. Renvoie un objet de type employé.
+description : Cette fonction permet de chercher l’employé le plus apte à faire la consultation.Renvoie un objet de type employé.Algorithme : 
+Un premier tri est fait selon le genre, puis l’employé avec le moins de consultations est renvoyé. Si aucun employé n’est dispo renvoyer un employé vide
+     * @param medium
+     * @return 
+**/
+    public Employe solliciterMedium (Medium medium){
+        Employe resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = employeDao.rechercheEmployeApte(medium);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service SolliciterMedium", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
 
-Algorithme : 
-Un premier tri est fait selon le genre, puis l’employé avec le moins de consultations est renvoyé.
-Si aucun employé n’est dispo renvoyer un employé vide
+        return resultat;
+    }
 
-
+    
+/**
 Service :  GenererProfilAstro(Client client)
 
 description : Cette fonction renvoie un objet du type profilAstro personnalisé au client passé au paramètre.

@@ -133,7 +133,7 @@ public class Client extends Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" + "signeAstrologique=" + signeAstrologique + ", signeChinois=" + signeChinois + ", animalTotem=" + animalTotem + ", couleurBonheur=" + couleurBonheur + '}';
+        return "Client : " + "nom=" + super.nom + "prenom" + super.prenom + "adresse=" + super.adresse + "email=" + super.email + "motDePasse=" + super.motDePasse + "signeAstrologique=" + signeAstrologique + ", signeChinois=" + signeChinois + ", animalTotem=" + animalTotem + ", couleurBonheur=" + couleurBonheur ;
     }
 
 

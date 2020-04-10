@@ -35,14 +35,17 @@ public class Astrologue extends Medium implements Serializable {
         this.presentation = presentation;
     }
 
+    @Override
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    @Override
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
+    @Override
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
@@ -65,18 +68,22 @@ public class Astrologue extends Medium implements Serializable {
         return presentation;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getNom() {
         return nom;
     }
 
+    @Override
     public String getPrenom() {
         return prenom;
     }
 
+    @Override
     public String getSexe() {
         return sexe;
     }

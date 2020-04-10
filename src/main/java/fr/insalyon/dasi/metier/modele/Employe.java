@@ -86,7 +86,7 @@ public class Employe extends Utilisateur implements Serializable {
     }
 
     public void setNom(String Nom) {
-        this.nom = nom;
+        this.nom = Nom;
     }
 
     public void setPrenom(String Prenom) {
@@ -115,7 +115,7 @@ public class Employe extends Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString()+ "Employe{" + "genre=" + genre + ", consultationEnCours=" + consultationEnCours + ", nombreSeance=" + nombreSeance + '}';
+        return "Employe : "+ "nom=" + super.nom + ", prenom" + super.prenom + ", adresse=" + super.adresse + ", email=" + super.email + ", motDePasse=" + super.motDePasse + ", genre=" + genre + ", consultationEnCours=" + consultationEnCours + ", nombreSeance=" + nombreSeance + '}';
     }
 
 }

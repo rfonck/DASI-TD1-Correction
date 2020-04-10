@@ -33,14 +33,17 @@ public class Spirite extends Medium implements Serializable  {
         this.support = support;
     }
 
+    @Override
     public void setNom(String nom) {
         this.nom = nom;
     }
 
+    @Override
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
+    @Override
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
@@ -59,18 +62,22 @@ public class Spirite extends Medium implements Serializable  {
         return support;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public String getNom() {
         return nom;
     }
 
+    @Override
     public String getPrenom() {
         return prenom;
     }
 
+    @Override
     public String getSexe() {
         return sexe;
     }
