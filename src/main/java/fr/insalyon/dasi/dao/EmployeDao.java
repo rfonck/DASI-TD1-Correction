@@ -52,5 +52,13 @@ public class EmployeDao {
         return result;
     }
     
-    // modifier / supprimer  ... 
+    public int accepterSeance(Employe employe){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Employe> query = em.createQuery("UPDATE Employe c SET c.consultationEnCours = true WHERE c.id = :id", Employe.class);
+        query.setParameter("id", employe.getId()); // correspond au paramètre ":mail" dans la requête
+        int n = query.executeUpdate();
+        return n;
+    }
 }
+
+

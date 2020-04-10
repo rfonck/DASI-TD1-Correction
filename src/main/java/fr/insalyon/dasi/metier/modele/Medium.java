@@ -27,41 +27,32 @@ public class Medium implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long id;
-    protected String nom;
-    protected String prenom;
-    protected String sexe;
 
-    public Medium(String nom, String prenom, String sexe) {
-        this.nom = nom;
-        this.prenom = prenom;
+    protected String sexe;
+    protected String denomination;
+
+    public Medium(String sexe, String denomination) {
         this.sexe = sexe;
+        this.denomination = denomination;
     }
 
     public Medium() {
+    }
+
+    public String getDenomination() {
+        return denomination;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
     public String getSexe() {
         return sexe;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setDenomination(String denomination) {
+        this.denomination = denomination;
     }
 
     public void setId(Long id) {
@@ -71,12 +62,11 @@ public class Medium implements Serializable  {
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
-    
+
     @Override
     public String toString() {
-        return "Medium : id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", sexe=" + sexe;
-    }        
-    
+        return "Medium{" + "id=" + id + ", sexe=" + sexe + ", denomination=" + denomination + '}';
+    }
 
     
     

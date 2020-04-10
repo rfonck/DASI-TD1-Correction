@@ -14,13 +14,16 @@ import javax.persistence.Entity;
 @Entity
 public class Astrologue extends Medium implements Serializable {
     
-    private String denomination;
     private String formation;
     private String promotion;
     private String presentation;
-
-    public void setDenomination(String denomination) {
+    
+    public Astrologue(String denomination,String presentation,String sexe, String formation, String promotion  ) {
+        super(sexe,denomination);
         this.denomination = denomination;
+        this.formation = formation;
+        this.promotion = promotion;
+        this.presentation = presentation;
     }
 
     public void setFormation(String formation) {
@@ -36,24 +39,8 @@ public class Astrologue extends Medium implements Serializable {
     }
 
     @Override
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    @Override
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    @Override
     public void setSexe(String sexe) {
         this.sexe = sexe;
-    }
-
-    
-    
-    public String getDenomination() {
-        return denomination;
     }
 
     public String getFormation() {
@@ -74,38 +61,16 @@ public class Astrologue extends Medium implements Serializable {
     }
 
     @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
-    public String getPrenom() {
-        return prenom;
-    }
-
-    @Override
     public String getSexe() {
         return sexe;
     }
-
-    
-    
+   
     public Astrologue() {
-    }
-
-    
-    
-    public Astrologue(String denomination, String formation, String promotion, String presentation, String nom, String prenom, String sexe) {
-        super(nom, prenom, sexe);
-        this.denomination = denomination;
-        this.formation = formation;
-        this.promotion = promotion;
-        this.presentation = presentation;
     }
 
    @Override
     public String toString() {
-        return "Astrologue : id=" + id + ", nom=" + super.nom + ", prenom=" + super.prenom + ", sexe=" + super.sexe + ", denomination=" + denomination + ", formation=" + formation + ", promotion=" + promotion +  ", presentation=" + presentation ;
+        return "Astrologue : id=" + id + ", denomination=" + super.denomination + ", sexe=" + super.sexe  + ", formation=" + formation + ", promotion=" + promotion +  ", presentation=" + presentation ;
     }
     
 }

@@ -46,25 +46,7 @@ public class Service {
         }
         return resultat;
     }
-        
-    public Long inscrireSeanceVoyance(SeanceVoyance seance) {
-        Long resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            JpaUtil.ouvrirTransaction();
-            seanceVoyanceDao.creer(seance);
-            JpaUtil.validerTransaction();
-            resultat = seance.getId();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
-            JpaUtil.annulerTransaction();
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
-        
+
     public Long creerMedium(Medium seance) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
@@ -88,6 +70,20 @@ public class Service {
         JpaUtil.creerContextePersistance();
         try {
             resultat = clientDao.chercherParId(id);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
+    public SeanceVoyance rechercherSeanceVoyanceParId(Long id) {
+        SeanceVoyance resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = seanceVoyanceDao.chercherParId(id);
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
             resultat = null;
@@ -125,7 +121,7 @@ public class Service {
         return resultat;
     }
     
-        public Astrologue rechercherAstrologueParNom(String nom) {
+    public Astrologue rechercherAstrologueParNom(String nom) {
         Astrologue resultat = null;
         JpaUtil.creerContextePersistance();
         try {
@@ -139,7 +135,19 @@ public class Service {
         return resultat;
     }
     
-
+    public Medium rechercherMedium(String nom) {
+        Medium resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = mediumDao.chercherParDenomination(nom);
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
 
     public List<Client> listerClients() {
         List<Client> resultat = null;
@@ -349,7 +357,6 @@ description : Cette fonction fournit l’historique des consultations du client 
     
     public List<SeanceVoyance> ConsulterHistoriqueSeances(Client client) {
         List<SeanceVoyance> resultat = null;
-        long id  = client.getId();
         JpaUtil.creerContextePersistance();
         try {
             resultat = SeanceVoyanceDao.listerSeanceVoyanceParClient(client);
@@ -373,6 +380,7 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
      * @param medium
      * @return 
 **/
+
     public Employe solliciterMedium (Medium medium){
         Employe resultat = null;
         JpaUtil.creerContextePersistance();
@@ -387,8 +395,53 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
 
         return resultat;
     }
-
     
+    public Long inscrireSeanceVoyance(SeanceVoyance seance) {
+        Long resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            seanceVoyanceDao.creer(seance);
+            JpaUtil.validerTransaction();
+            resultat = seance.getId();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            JpaUtil.annulerTransaction();
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+/**
+ Service : accepterConsultation(Employe employe)
+ 
+ Decription : Cette fonction change le statut de l'employé et de la consultation
+ 
+ Algorithme : Ce service change le bool consultationEnCours d'employe et le bool enCours de SeanceVoyance et d'autre trucs aussi
+     * @param seance
+     * @param employe
+     * @return 
+ **/
+public int AccepterConsultation(SeanceVoyance seance,Employe employe){
+    int resultat = 0;
+    JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            employeDao.accepterSeance(employe);
+            resultat = seanceVoyanceDao.accepterSeance(seance);
+            JpaUtil.validerTransaction();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service SolliciterMedium", ex);
+            JpaUtil.annulerTransaction();
+            resultat = 0;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+
+        return resultat;
+    
+}
 /**
 Service :  GenererProfilAstro(Client client)
 

@@ -4,6 +4,7 @@ import fr.insalyon.dasi.metier.modele.Employe;
 import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.Client;
 import fr.insalyon.dasi.metier.modele.SeanceVoyance;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -49,6 +50,16 @@ public class SeanceVoyanceDao {
     TypedQuery<SeanceVoyance> query = em.createQuery("SELECT c FROM SeanceVoyance c WHERE c.medium = :medium", SeanceVoyance.class);
     query.setParameter("medium", medium);
     return query.getResultList();
+    }
+    
+    public int accepterSeance(SeanceVoyance seance){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<SeanceVoyance> query = em.createQuery("UPDATE SeanceVoyance c SET c.enCours = true, c.employe = :employe, c.debut = :debut WHERE c.id = :id", SeanceVoyance.class);
+        query.setParameter("id", seance.getId()); // correspond au paramètre ":mail" dans la requête
+        query.setParameter("employe", seance.getEmploye());
+        query.setParameter("debut", Calendar.getInstance());
+        int n = query.executeUpdate();
+        return n;
     }
     // modifier / supprimer  ... 
 }

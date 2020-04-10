@@ -17,14 +17,17 @@ import javax.persistence.Entity;
 @Entity
 public class Spirite extends Medium implements Serializable  {
     
-    private String denomination;
+
     private String presentation;
     private String support;
 
-    public void setDenomination(String denomination) {
+    public Spirite(String denomination, String presentation, String sexe,String support) {
+        super(sexe, denomination);
         this.denomination = denomination;
+        this.presentation = presentation;
+        this.support = support;
     }
-
+    
     public void setPresentation(String presentation) {
         this.presentation = presentation;
     }
@@ -34,24 +37,8 @@ public class Spirite extends Medium implements Serializable  {
     }
 
     @Override
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    @Override
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    @Override
     public void setSexe(String sexe) {
         this.sexe = sexe;
-    }
-
-    
-    
-    public String getDenomination() {
-        return denomination;
     }
 
     public String getPresentation() {
@@ -68,43 +55,16 @@ public class Spirite extends Medium implements Serializable  {
     }
 
     @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
-    public String getPrenom() {
-        return prenom;
-    }
-
-    @Override
     public String getSexe() {
         return sexe;
     }
 
     public Spirite() {
     }
-
-    public Spirite(String denomination, String presentation, String support, String nom, String prenom, String sexe) {
-        super(nom, prenom, sexe);
-        this.denomination = denomination;
-        this.presentation = presentation;
-        this.support = support;
-    }
-
-        @Override
+    
+    @Override
     public String toString() {
-        return "Spirite : id=" + super.id + ", nom=" + super.nom + ", prenom=" + super.prenom + ", sexe=" + super.sexe + ", denomination=" + denomination + ", presentation=" + presentation + ", support=" + support ;
+        return "Spirite : id=" + super.id + ", denomination=" + super.denomination + ", sexe=" + super.sexe + ", presentation=" + presentation + ", support=" + support ;
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
+       
 }

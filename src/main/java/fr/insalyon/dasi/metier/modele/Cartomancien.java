@@ -20,11 +20,11 @@ import javax.persistence.Entity;
 @Entity
 public class Cartomancien extends Medium implements Serializable {
 
-    private String denomination;
     private String presentation;
 
-    public void setDenomination(String denomination) {
-        this.denomination = denomination;
+    public Cartomancien(String denomination, String presentation, String sexe ) {
+        super(sexe, denomination);
+        this.presentation = presentation;
     }
 
     public void setPresentation(String presentation) {
@@ -32,24 +32,8 @@ public class Cartomancien extends Medium implements Serializable {
     }
 
     @Override
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    @Override
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    @Override
     public void setSexe(String sexe) {
         this.sexe = sexe;
-    }
-
-    
-    
-    public String getDenomination() {
-        return denomination;
     }
 
     public String getPresentation() {
@@ -62,35 +46,16 @@ public class Cartomancien extends Medium implements Serializable {
     }
 
     @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
-    public String getPrenom() {
-        return prenom;
-    }
-
-    @Override
     public String getSexe() {
         return sexe;
     }
 
-    
-    
     public Cartomancien() {
-    }
-
-    public Cartomancien(String denomination, String presentation, String nom, String prenom, String sexe) {
-        super(nom, prenom, sexe);
-        this.denomination = denomination;
-        this.presentation = presentation;
     }
 
     @Override
     public String toString() {
-        return "Cartomancien : id=" + super.id + ", nom=" + super.nom + ", prenom=" + super.prenom + ", sexe=" + super.sexe + ", denomination=" + denomination + ", presentation=" + presentation ;
+        return "Cartomancien : id=" + super.id + ", denomination=" + super.denomination + ", sexe=" + super.sexe + ", presentation=" + presentation ;
     }
     
-
 }

@@ -58,12 +58,24 @@ public class MediumDao {
         return em.find(Astrologue.class, astroId); // renvoie null si l'identifiant n'existe pas
     }
     
-        public Astrologue chercherParNomAstrologue(String nom) {
+    public Astrologue chercherParNomAstrologue(String denomination) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Astrologue> query = em.createQuery("SELECT a FROM Utilisateur a WHERE a.nom = :nom", Astrologue.class);
-        query.setParameter("nom", nom); // correspond au paramètre ":mail" dans la requête
+        TypedQuery<Astrologue> query = em.createQuery("SELECT a FROM Astrologue a WHERE a.denomination = :denomination", Astrologue.class);
+        query.setParameter("denomination", denomination); // correspond au paramètre ":mail" dans la requête
         List<Astrologue> clients = query.getResultList();
         Astrologue result = null;
+        if (!clients.isEmpty()) {
+            result = clients.get(0); // premier de la liste
+        }
+        return result;
+    }
+    
+    public Medium chercherParDenomination(String denomination) {
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+        TypedQuery<Medium> query = em.createQuery("SELECT a FROM Medium a WHERE a.denomination = :denomination", Medium.class);
+        query.setParameter("denomination", denomination); // correspond au paramètre ":mail" dans la requête
+        List<Medium> clients = query.getResultList();
+        Medium result = null;
         if (!clients.isEmpty()) {
             result = clients.get(0); // premier de la liste
         }

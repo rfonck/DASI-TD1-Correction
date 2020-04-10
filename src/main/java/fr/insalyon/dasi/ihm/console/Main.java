@@ -9,16 +9,10 @@ import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.Astrologue;
-import static fr.insalyon.dasi.metier.modele.SeanceVoyance_.medium;
 import fr.insalyon.dasi.metier.service.Service;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -34,15 +28,15 @@ public class Main {
         System.out.println("-------- tests de création d'objets -------- " );
         Calendar aujourdhui = Calendar.getInstance(); 
         
-        Medium aurel = new Spirite("Gwenaëlle", "Spécialiste des grandes conversations au-delà de TOUTES les frontières.", "Boule de cristal","nom", "prenom", "F");       
+        Medium aurel = new Spirite("Gwenaëlle", "Spécialiste des grandes conversations au-delà de TOUTES les frontières.", "F", "Boule de cristal");       
 
-        Medium romain = new Spirite("Professeur Tran", "Marc de café, boule de cristal, oreilles de lapin", "Votre avenir est devant vous: regardons-le ensemble!", "nom", "prenom", "H");
+        Medium romain = new Spirite("Professeur Tran", "Marc de café, boule de cristal, oreilles de lapin", "H", "Votre avenir est devant vous: regardons-le ensemble!");
         
-        Medium jj = new Astrologue("Serena", "École Normale Supérieure d’Astrologie (ENS-Astro)", "2006", "Basée  à  Champigny-sur-Marne, Serena vous révèlera votre  avenir  pour éclairer  votre passé.", "nom", "prenom", "F");   
+        Medium jj = new Astrologue("Serena", "École Normale Supérieure d’Astrologie (ENS-Astro)", "F", "2006", "Basée  à  Champigny-sur-Marne, Serena vous révèlera votre  avenir  pour éclairer  votre passé.");   
         
-        Medium bastien = new Cartomancien( "Mme Irma", "Comprenez votre entourage grâce à mes cartes! Résultats rapides.", "nom", "prenom", "F"); 
+        Medium bastien = new Cartomancien( "Mme Irma", "Comprenez votre entourage grâce à mes cartes! Résultats rapides.", "F"); 
         
-        Medium agathe = new Cartomancien( "Endora", "Mes cartes répondront à toutes vos questions personnelles.", "nom", "prenom", "F"); 
+        Medium agathe = new Cartomancien( "Endora", "Mes cartes répondront à toutes vos questions personnelles.", "F"); 
         
         TimeZone heure = aujourdhui.getTimeZone();
         
@@ -83,8 +77,8 @@ public class Main {
         
         Calendar debut = Calendar.getInstance();
         SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
-        
-        service.inscrireSeanceVoyance(seance); 
+        Long lid;
+        lid = service.inscrireSeanceVoyance(seance); 
         
         //test d'authentification et connexion
         System.out.println("-------- test d'authentification et connexion -------- " );
@@ -124,9 +118,18 @@ public class Main {
         System.out.println("-------- test recherche employe  -------- " ); 
         Employe lemploye = service.solliciterMedium(jj);
         System.out.println("-> " + lemploye.toString());
+        
+        //test recherche medium
+        Medium racli = service.rechercherMedium("Mme Irma");
+        System.out.println("-> " + racli.toString());
+        
+        //test validation seance voyance
+        System.out.println("-------- test modif seance voyance  -------- " ); 
+        SeanceVoyance newseance = service.rechercherSeanceVoyanceParId(lid);
+        service.AccepterConsultation(newseance, lemploye);
+        Employe ronaldo = service.rechercherEmployeParMail(lemploye.getEmail());
+        System.out.println("-> " + ronaldo.toString());
+        
         JpaUtil.destroy();
-        
-
-        
     }
 }
