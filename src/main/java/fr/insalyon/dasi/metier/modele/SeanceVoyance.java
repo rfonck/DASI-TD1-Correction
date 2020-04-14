@@ -60,8 +60,7 @@ public class SeanceVoyance implements Serializable {
         this.enCours = true;
     }
     
-    public void FinaliserSeance (String commentaire){
-        this.commentaire  = commentaire;
+    public void FinaliserSeance (){
         this.fin = Calendar.getInstance(); 
         this.enCours = false;   
     }

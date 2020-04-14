@@ -12,7 +12,12 @@ import fr.insalyon.dasi.metier.modele.Medium;
 import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.SeanceVoyance;
+import fr.insalyon.dasi.util.AstroTest;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -445,17 +450,35 @@ public int AccepterConsultation(SeanceVoyance seance,Employe employe){
 /**
 Service :  GenererProfilAstro(Client client)
 
-description : Cette fonction renvoie un objet du type profilAstro personnalisé au client passé au paramètre.
+description : Cette fonction renvoie un objet du type profilAstro personnalisé au client passé au paramètre.Algorithme : Ce service réalise une requête au service web externe IfAstroNet et renvoie le résultat.
+     * @param client 
+     * @return  
+     * @throws java.io.IOException 
+*/
 
-Algorithme : Ce service réalise une requête au service web externe IfAstroNet et renvoie le résultat. 
+public List<String> GenererProfilAstro(Client client) throws IOException{
+    
+    AstroTest interfaceProfil = new AstroTest();
+    List<String> profilAstro = interfaceProfil.getProfil( client.getPrenom() , client.getDateNaissance().getTime());
+    return profilAstro;
+}
 
 
-
+/*
 Service :  soumettreNote(seanceVoyance seance, String commentaire)
 
 description : Ce service ajoute le commentaire à la séance passé en paramètre.
 
 Algorithme : Ce service crée ou modifie l’attribut Commentaire de l’objet seanceVoyance passé en commentaire pour lui donner la valeur du commentaire passé en paramètre.
+*/
+
+public SeanceVoyance SoumettreNote(SeanceVoyance seance, String commentaire){
+    
+    seance.setCommentaire(commentaire);
+    return seance;
+}
+/*
+
 
 Service :  string generateurVoyance (int noteAmour, int noteTravail , int noteSanté)
 
@@ -463,8 +486,17 @@ description : Prend les trois notes en paramètre et renvoie une prédiction ada
 
 Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phrase est associée. Il y a donc 12 phrases différentes à créer. 
 La fonction renverra un string contenant toutes les prédictions.
+*/
 
+public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) throws IOException{
+    
+    AstroTest interfaceProfil = new AstroTest();
+    List<String> profilAstro ;
+    profilAstro = interfaceProfil.getPredictions(client.getCouleurBonheur(), client.getAnimalTotem(), noteAmour, noteSante, noteTravail);
+    return profilAstro;
+}
 
+/*
 Service : finSeance(seanceVoyance seance) 
 
 description : Ce service archive la séance.
@@ -473,5 +505,54 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
 
      */
     
-    
+    public void finSeance(SeanceVoyance seance) {
+        seance.FinaliserSeance();
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            seanceVoyanceDao.creer(seance);
+            JpaUtil.validerTransaction();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            JpaUtil.annulerTransaction();
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+    }
+/*
+Service : InitialisationMediums() 
+
+description : Ce service enrengistre les médiums présents de base.
+
+Algorithme :IOException
+
+     */
+    public void InitialisationMediumsEmployes() {
+        Medium aurel = new Spirite("Gwenaëlle", "Spécialiste des grandes conversations au-delà de TOUTES les frontières.", "F", "Boule de cristal");       
+        Medium romain = new Spirite("Professeur Tran", "Marc de café, boule de cristal, oreilles de lapin", "H", "Votre avenir est devant vous: regardons-le ensemble!");
+        Medium jj = new Astrologue("Serena", "École Normale Supérieure d’Astrologie (ENS-Astro)", "F", "2006", "Basée  à  Champigny-sur-Marne, Serena vous révèlera votre  avenir  pour éclairer  votre passé.");   
+        Medium bastien = new Cartomancien( "Mme Irma", "Comprenez votre entourage grâce à mes cartes! Résultats rapides.", "F"); 
+        Medium agathe = new Cartomancien( "Endora", "Mes cartes répondront à toutes vos questions personnelles.", "F"); 
+        Calendar aujourdhui = Calendar.getInstance(); 
+        Employe thomas  = new Employe( "Nom", "Prenom", aujourdhui, "Adresse", "Email", 1029384756, "MotDePasse" ,"F",false,12);
+        Employe michou  = new Employe( "Blaze", "Prenom", aujourdhui, "Adresse", "Yoyoyo", 1029384756, "MotDePasse" ,"F",false,4);
+        
+        JpaUtil.creerContextePersistance();
+        try {
+            JpaUtil.ouvrirTransaction();
+            mediumDao.creer(aurel);
+            mediumDao.creer(romain);
+            mediumDao.creer(jj);
+            mediumDao.creer(bastien);
+            mediumDao.creer(agathe);
+            employeDao.creer(thomas);
+            employeDao.creer(michou);            
+            JpaUtil.validerTransaction();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service InitialisationMediums()", ex);
+            JpaUtil.annulerTransaction();
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+    }
 }

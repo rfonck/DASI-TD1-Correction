@@ -27,18 +27,7 @@ public class Main {
         /** tests de création d'objets **/
         System.out.println("-------- tests de création d'objets -------- " );
         Calendar aujourdhui = Calendar.getInstance(); 
-        
-        Medium aurel = new Spirite("Gwenaëlle", "Spécialiste des grandes conversations au-delà de TOUTES les frontières.", "F", "Boule de cristal");       
-
-        Medium romain = new Spirite("Professeur Tran", "Marc de café, boule de cristal, oreilles de lapin", "H", "Votre avenir est devant vous: regardons-le ensemble!");
-        
-        Medium jj = new Astrologue("Serena", "École Normale Supérieure d’Astrologie (ENS-Astro)", "F", "2006", "Basée  à  Champigny-sur-Marne, Serena vous révèlera votre  avenir  pour éclairer  votre passé.");   
-        
-        Medium bastien = new Cartomancien( "Mme Irma", "Comprenez votre entourage grâce à mes cartes! Résultats rapides.", "F"); 
-        
-        Medium agathe = new Cartomancien( "Endora", "Mes cartes répondront à toutes vos questions personnelles.", "F"); 
-        
-        TimeZone heure = aujourdhui.getTimeZone();
+       
         
         Employe thomas  = new Employe( "Nom", "Prenom", aujourdhui, "Adresse", "Email", 1029384756, "MotDePasse" ,"F",false,12);
         
@@ -58,13 +47,7 @@ public class Main {
         Service service = new Service();
 
         service.inscrireClient(Matteo);
-        service.inscrireEmploye(thomas);
-        service.inscrireEmploye(michou);
-        service.creerMedium(jj);
-        service.creerMedium(agathe);
-        service.creerMedium(romain);
-        service.creerMedium(bastien);
-        service.creerMedium(aurel);        
+        service.InitialisationMediumsEmployes();    
         long bite  = 1;
         
         Client iencli = service.rechercherClientParId(bite);
@@ -113,7 +96,7 @@ public class Main {
         for(int i=0; i< musolini.size(); i++ ){
             System.out.println("-> " + musolini.get(i).toString()); 
         }
-        
+        Medium jj = service.rechercherMedium("Serena");
         //test recherche employe
         System.out.println("-------- test recherche employe  -------- " ); 
         Employe lemploye = service.solliciterMedium(jj);
