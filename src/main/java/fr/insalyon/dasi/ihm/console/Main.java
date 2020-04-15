@@ -139,22 +139,9 @@ public class Main {
         Client client1 = service.connecterClient(email, mdp);
         System.out.println("    -> " + client1.toString());
         
-        System.out.println("  " ); 
-        System.out.println("2. Le client consulte son  profil astro " ); 
-        System.out.println("  " ); 
-        
-        AstroTest test = new AstroTest();
-        
-        List<String> profil = service.GenererProfilAstro(client1);
-     
-        System.out.println("        Profil astro :" );
-        for(int i = 0; i< profil.size() ; i++)
-        {
-            System.out.println( profil.get(i).toString());
-        }
         
         System.out.println("  " ); 
-        System.out.println("3. Le client consulte son historique " ); 
+        System.out.println("2. Le client consulte son historique " ); 
         System.out.println("  " );
         
         List<SeanceVoyance> histo = service.ConsulterHistoriqueSeances(client1);
@@ -165,7 +152,7 @@ public class Main {
         }
         
         System.out.println("  " ); 
-        System.out.println("4. Le client décide de demander à voir la liste des mediums " ); 
+        System.out.println("3. Le client décide de demander à voir la liste des mediums " ); 
         System.out.println("  " );
                 
         List<Medium> mediums = service.listerMedium();
@@ -178,7 +165,7 @@ public class Main {
        
         
         System.out.println("  " ); 
-        System.out.println("5. Il a choisi un médium pour sa consultation et le sollicite " ); 
+        System.out.println("4. Il a choisi un médium pour sa consultation et le sollicite " ); 
         System.out.println("  " );
                 
         Medium aSolliciter = service.rechercherMedium("Mme Irma");
@@ -188,7 +175,7 @@ public class Main {
         
        
         System.out.println("  " ); 
-        System.out.println("6. Le medium accepte le job " ); 
+        System.out.println("5. Le medium accepte le job " ); 
         System.out.println("  " );
 
         service.AccepterConsultation(client1, apte, aSolliciter);
@@ -196,18 +183,18 @@ public class Main {
         System.out.println("       L'objet séanceVoyance est crée et initialisé, l'heure de début est l'heure courante");
         
         System.out.println("  " ); 
-        System.out.println("7. Soudain, le médium à un trou. Il demande à être aidé grâce à une prédiction générée informatiquement " ); 
+        System.out.println("6. Soudain, le médium à un trou. Il demande à être aidé grâce à une prédiction générée informatiquement " ); 
         System.out.println("  " );
         
         List<String> prediction = service.generateurVoyance(client1, 1, 3, 2);
         
         for(int i = 0; i< prediction.size() ; i++)
         {
-                 System.out.println("       Prédiction n°  " + i +  " "+   prediction.get(i).toString());
+            System.out.println("       Prédiction n°  " + i +  " "+   prediction.get(i).toString());
         }
 
         System.out.println("  " ); 
-        System.out.println("8. La Séance touche à sa fin, l'employé saisit un commentaire et cloture la séance." ); 
+        System.out.println("7. La Séance touche à sa fin, l'employé saisit un commentaire et cloture la séance." ); 
         System.out.println("  " );        
         
         seance.setCommentaire("Je ressent des ondes très positives chez ce client");
