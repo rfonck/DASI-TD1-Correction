@@ -369,7 +369,7 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
         try {
             employe = employeDao.rechercheEmployeApte(medium);
             String num = Integer.toString(employe.getNumTel());
-            Message.envoyerNotification( num ,"Pour : "+ employe.getprenom() + " "+ employe.getNom() + ", Tel : "+num +" Message : Bonjour "+ employe.getprenom() + ". Consultation requise pour "+ client.getprenom() +" " + client.getprenom() + " Médium à incarner : " + medium.getDenomination());
+            Message.envoyerNotification( num ,"Pour : "+ employe.getprenom() + " "+ employe.getNom() + ", Tel : "+num +" \n Message : Bonjour "+ employe.getprenom() + ". Consultation requise pour "+ client.getprenom() +" " + client.getprenom() + " \nMédium à incarner : " + medium.getDenomination());
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service SolliciterMedium", ex);
             employe = null;
@@ -409,17 +409,12 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
      * @return 
  **/
 
-    public SeanceVoyance AccepterConsultation(SeanceVoyance seance){
-    int resultat = 0;
-    Client client = seance.getClient();
-    Medium medium = seance.getMedium();
-    Employe employe = seance.getEmploye();
-    seance.setEnCours(true);
+    public SeanceVoyance AccepterConsultation(Client client, Employe employe, Medium medium){
+    SeanceVoyance seance = new SeanceVoyance(client, employe, medium);
     JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
             employeDao.accepterSeance(employe);
-            resultat = seanceVoyanceDao.accepterSeance(seance);
             Message.envoyerNotification(Integer.toString(client.getNumTel()), "Pour : "+ client.getPrenom() + " "+ client.getNom()+", Tel : "+ client.getnumTel()+ "\n" +
 "Message : Bonjour "+ client.getPrenom() + ". J’ai bien reçu votre demande de consultation du "+ Calendar.getInstance().getTime().toString() + ".\n" +
 "Vous pouvez dès à présent me contacter au "+ Integer.toString(employe.getNumTel()) + ". A tout de suite ! Médiumiquement\n" +
@@ -428,7 +423,6 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service AccepterConsultation(seance, employe)", ex);
             JpaUtil.annulerTransaction();
-            resultat = 0;
         } finally {
             JpaUtil.fermerContextePersistance();
         }
@@ -491,12 +485,20 @@ Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phras
 La fonction renverra un string contenant toutes les prédictions.
 **/
 
-    public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) throws IOException{
+    public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) {
     
-    AstroTest interfaceProfil = new AstroTest();
-    List<String> profilAstro ;
-    profilAstro = interfaceProfil.getPredictions(client.getCouleurBonheur(), client.getAnimalTotem(), noteAmour, noteSante, noteTravail);
-    return profilAstro;
+    AstroTest interfaceProfil = new AstroTest();    
+    List<String> prediction = null ;
+    
+    try {
+        prediction = interfaceProfil.getPredictions(client.getCouleurBonheur(), client.getAnimalTotem(), noteAmour, noteSante, noteTravail);
+    
+    } catch (IOException ex) {
+        Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service GenererProfilAstro(client)", ex);
+ 
+    } finally {
+    }
+    return prediction;
 }
 
     /**

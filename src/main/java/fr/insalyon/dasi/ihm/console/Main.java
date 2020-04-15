@@ -114,14 +114,18 @@ public class Main {
         //test validation seance voyance
         System.out.println("-------- test modif seance voyance  -------- " ); 
         SeanceVoyance newseance = service.rechercherSeanceVoyanceParId(lid);
-        service.AccepterConsultation(newseance);
+        service.AccepterConsultation(client,lemploye,jj);
         Employe ronaldo = service.rechercherEmployeParMail(lemploye.getEmail());
         System.out.println("-> " + ronaldo.toString());
         
         //test validation seance voyance
+
+        
+        
         System.out.println("-------------------------------------------- " ); 
         System.out.println("--------test de déroulement de séance------- " ); 
         System.out.println("-------------------------------------------- " ); 
+        
         System.out.println("  " ); 
         System.out.println("1. Le client se connecte " ); 
         System.out.println("  " ); 
@@ -174,7 +178,7 @@ public class Main {
        
         
         System.out.println("  " ); 
-        System.out.println("4. Il a choisi un médium pour sa consultation et le sollicite " ); 
+        System.out.println("5. Il a choisi un médium pour sa consultation et le sollicite " ); 
         System.out.println("  " );
                 
         Medium aSolliciter = service.rechercherMedium("Mme Irma");
@@ -182,23 +186,33 @@ public class Main {
         
         System.out.println("       L'employé " + apte.toString() + " va interpréter ce rôle");
         
-        SeanceVoyance nouvSeance = new SeanceVoyance(client1, apte, aSolliciter);
-        
-        System.out.println("       On crée et inscrit la séance : " + nouvSeance.toString());
-        
-        service.inscrireSeanceVoyance(nouvSeance);
-        
-        
+       
         System.out.println("  " ); 
-        System.out.println("5. Le medium accepte le job " ); 
+        System.out.println("6. Le medium accepte le job " ); 
         System.out.println("  " );
 
-        service.AccepterConsultation(nouvSeance);
+        service.AccepterConsultation(client1, apte, aSolliciter);
+        
+        System.out.println("       L'objet séanceVoyance est crée et initialisé, l'heure de début est l'heure courante");
+        
+        System.out.println("  " ); 
+        System.out.println("7. Soudain, le médium à un trou. Il demande à être aidé grâce à une prédiction générée informatiquement " ); 
+        System.out.println("  " );
+        
+        List<String> prediction = service.generateurVoyance(client1, 1, 3, 2);
+        
+        for(int i = 0; i< prediction.size() ; i++)
+        {
+                 System.out.println("       Prédiction n°  " + i +  " "+   prediction.get(i).toString());
+        }
 
         System.out.println("  " ); 
-        System.out.println("5. Le medium accepte le job " ); 
-        System.out.println("  " );
-
+        System.out.println("8. La Séance touche à sa fin, l'employé saisit un commentaire et cloture la séance." ); 
+        System.out.println("  " );        
+        
+        seance.setCommentaire("Je ressent des ondes très positives chez ce client");
+        service.finSeance(seance);
+     
         
         JpaUtil.destroy();
     }
