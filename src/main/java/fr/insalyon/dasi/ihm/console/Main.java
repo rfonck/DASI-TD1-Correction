@@ -31,8 +31,7 @@ public class Main {
         /** tests de création d'objets **/
         System.out.println("-------- tests de création d'objets -------- " );
         Calendar aujourdhui = Calendar.getInstance(); 
-       
-        
+
         Employe thomas  = new Employe( "Nom", "Prenom", aujourdhui, "Adresse", "Email", 1029384756, "MotDePasse" ,"F",false,12);
         
         Employe michou  = new Employe( "Blaze", "Prenom", aujourdhui, "Adresse", "Yoyoyo", 1029384756, "MotDePasse" ,"F",false,4);
@@ -119,7 +118,19 @@ public class Main {
         System.out.println("-> " + ronaldo.toString());
         
         //test validation seance voyance
-
+        System.out.println("-------------------------------------------- " ); 
+        System.out.println("--------test de déroulement de séance------- " ); 
+        System.out.println("-------------------------------------------- " ); 
+        
+        
+        System.out.println("  " ); 
+        System.out.println("1. Le client se connecte " ); 
+        System.out.println("  " ); 
+        
+        
+        Client inscrit = new Client("bastien","bertholom", aujourdhui, "INSA", "bastoche", 1234567890, "TruiteFumée");
+        service.inscrireClient(inscrit);
+        
         
         
         System.out.println("-------------------------------------------- " ); 
@@ -160,7 +171,7 @@ public class Main {
         System.out.println("        nous vous proposons nos médiums : " );
         for(int i = 0; i< mediums.size() ; i++)
         {
-                 System.out.println("       Séance de voyance n°  " + i +  " "+   mediums.get(i).toString());
+                 System.out.println("       Médium n°  " + i +  " "+   mediums.get(i).toString());
         }
        
         

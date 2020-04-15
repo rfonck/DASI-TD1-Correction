@@ -127,19 +127,7 @@ public class Service {
         return resultat;
     }
     
-    public Astrologue rechercherAstrologueParNom(String nom) {
-        Astrologue resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            resultat = mediumDao.chercherParNomAstrologue(nom);
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherAstrologueParNom(nom)", ex);
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
+
     
     public Medium rechercherMedium(String nom) {
         Medium resultat = null;
@@ -182,6 +170,14 @@ Sinon on renvoie un booléen false.
     
         public Long inscrireClient(Client client) {
         Long resultat = null;
+        List<String> caracteristiquesAstrologiques =  GenererProfilAstro(client);
+        
+        client.setAnimalTotem(caracteristiquesAstrologiques.get(3));
+        client.setCouleurBonheur(caracteristiquesAstrologiques.get(2));    
+        client.setSigneAstrologique(caracteristiquesAstrologiques.get(0));
+        client.setSigneChinois(caracteristiquesAstrologiques.get(1));          
+        
+        
         JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();

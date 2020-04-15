@@ -17,6 +17,10 @@ public class Client extends Utilisateur implements Serializable {
     private String animalTotem;
     private String couleurBonheur;
 
+    public Client(String nom, String prenom, Calendar dateNaissance, String adresse, String email, int numTel, String motDePasse) {
+        super(nom, prenom, dateNaissance, adresse, email, numTel, motDePasse);
+    }
+
     
     public Client(String Nom, String Prenom, Calendar DateNaissance, String Adresse, String Email, int NumTel, String MotDePasse,String signeAstrologique, String signeChinois, String animalTotem, String couleurBonheur) {
         super(Nom, Prenom, DateNaissance, Adresse, Email, NumTel, MotDePasse);
