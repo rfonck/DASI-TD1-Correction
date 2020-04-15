@@ -28,94 +28,9 @@ public class Main {
          
         JpaUtil.init();
         
-        /** tests de création d'objets **/
-        System.out.println("-------- tests de création d'objets -------- " );
-        Calendar aujourdhui = Calendar.getInstance(); 
-
-        Employe thomas  = new Employe( "Nom", "Prenom", aujourdhui, "Adresse", "Email", 1029384756, "MotDePasse" ,"F",false,12);
-        
-        Employe michou  = new Employe( "Blaze", "Prenom", aujourdhui, "Adresse", "Yoyoyo", 1029384756, "MotDePasse" ,"F",false,4);
-        
-        Client JjLeRageux = new Client( "meldrum", "jj", aujourdhui, "efae", "zefjaepip", 123456789, "MotDePasse","cancer", "pinguin","ane", "blanc cassé");
-        
-        Client Mario = new Client( "G", "mario", aujourdhui, "bouh", "aaah", 123456789, "MotDePasse","cancer", "mario","mario", "blanc cassé");
-       
-        Client Matteo = new Client( "dumont", "mateeo", aujourdhui, "iii", "eee", 123456789, "MotDePasse","cancer", "mateo","mateo", "blanc cassé");
-       
-
-        /** test des inscriptions **/
-        System.out.println("-------- test de inscriptions -------- " );
-        
-        
         Service service = new Service();
-        service.inscrireClient(Matteo);
-        service.InitialisationMediumsEmployes();    
-        
-        /** tests de recherche **/
-        long id  = 1;
-        
-        Client iencli = service.rechercherClientParId(id);
-        Client client = service.rechercherClientParMail("eee");       
-        Employe emplo = service.rechercherEmployeParMail("Email");
-        Medium astro = service.rechercherMedium("Serena");
-     
-        //test de création et persistance d'objets
-        System.out.println("-------- test de création et persistance d'objets -------- " );
-        
-        Calendar debut = Calendar.getInstance();
-        SeanceVoyance seance = new SeanceVoyance(debut,  debut, true, "commentaire", client, emplo, astro);
-        Long lid;
-        lid = service.inscrireSeanceVoyance(seance); 
-        
-        //test d'authentification et connexion
-        System.out.println("-------- test d'authentification et connexion -------- " );
-        
-        String username = "Email";
-        String motdePasse = "MotDePasse";
-        
-        String un = service.identifierUtilisateur(username, motdePasse);
-        System.out.println("-> " + un);
-        if(un.equals("client")){
-            Client hello = service.connecterClient(username, motdePasse);
-            System.out.println("-> " + hello.toString());
-            
-            
-        }
-        else if(un.equals("employe")){
-            Employe hello = service.connecterEmploye(username, motdePasse);
-            System.out.println("-> " + hello.toString());  
-        }
-        
-        //test de listage de medium 
-        System.out.println("-------- test de listage de medium  -------- " );        
-        List<Medium> listeCharlo = service.listerMedium();
-        for(int i=0; i< listeCharlo.size(); i++ ){
-            System.out.println("-> " + listeCharlo.get(i).toString()); 
-        }
-        
-        
-        //test de l'historique des voyances d'un utilisateur 
-        System.out.println("-------- test de l'historique des voyances d'un utilisateur   -------- " );  
-        List<SeanceVoyance> musolini = service.ConsulterHistoriqueSeances(client);
-        for(int i=0; i< musolini.size(); i++ ){
-            System.out.println("-> " + musolini.get(i).toString()); 
-        }
-        Medium jj = service.rechercherMedium("Serena");
-        //test recherche employe
-        System.out.println("-------- test recherche employe  -------- " ); 
-        Employe lemploye = service.solliciterMedium(jj,client);
-        System.out.println("-> " + lemploye.toString());
-        
-        //test recherche medium
-        Medium racli = service.rechercherMedium("Mme Irma");
-        System.out.println("-> " + racli.toString());
-        
-        //test validation seance voyance
-        System.out.println("-------- test modif seance voyance  -------- " ); 
-        SeanceVoyance newseance = service.rechercherSeanceVoyanceParId(lid);
-        service.AccepterConsultation(client,lemploye,jj);
-        Employe ronaldo = service.rechercherEmployeParMail(lemploye.getEmail());
-        System.out.println("-> " + ronaldo.toString());
+        service.InitialisationMediumsEmployes();
+        Calendar aujourdhui = Calendar.getInstance();
         
         //test validation seance voyance
         System.out.println("-------------------------------------------- " ); 
@@ -141,8 +56,8 @@ public class Main {
         System.out.println("1. Le client se connecte " ); 
         System.out.println("  " ); 
         
-        String email = "eee";
-        String mdp = "MotDePasse";
+        String email = "bastoche";
+        String mdp = "TruiteFumée";
         
         String denomination = service.identifierUtilisateur(email, mdp);
         System.out.println("    -> " + denomination);
@@ -189,7 +104,7 @@ public class Main {
         System.out.println("5. Le medium accepte le job " ); 
         System.out.println("  " );
 
-        service.AccepterConsultation(client1, apte, aSolliciter);
+        SeanceVoyance seance = service.AccepterConsultation(client1, apte, aSolliciter);
         
         System.out.println("       L'objet séanceVoyance est crée et initialisé, l'heure de début est l'heure courante");
         
@@ -201,7 +116,7 @@ public class Main {
         
         for(int i = 0; i< prediction.size() ; i++)
         {
-            System.out.println("       Prédiction n°  " + i +  " "+   prediction.get(i).toString());
+            System.out.println("       Prédiction n°  " + i +  " "+   prediction.get(i));
         }
 
         System.out.println("  " ); 
@@ -211,7 +126,6 @@ public class Main {
         seance.setCommentaire("Je ressent des ondes très positives chez ce client");
         service.finSeance(seance);
      
-        
         JpaUtil.destroy();
     }
 }

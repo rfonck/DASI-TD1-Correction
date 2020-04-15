@@ -32,44 +32,8 @@ public class Service {
     protected EmployeDao employeDao = new EmployeDao();
     protected SeanceVoyanceDao seanceVoyanceDao = new SeanceVoyanceDao();
     protected MediumDao mediumDao = new MediumDao();
-    
 
 
-    public Long inscrireEmploye(Employe employe) {
-        Long resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            JpaUtil.ouvrirTransaction();
-            employeDao.creer(employe);
-            JpaUtil.validerTransaction();
-            resultat = employe.getId();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
-            JpaUtil.annulerTransaction();
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
-
-    public Long creerMedium(Medium medium) {
-        Long resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            JpaUtil.ouvrirTransaction();
-            mediumDao.creer(medium);
-            JpaUtil.validerTransaction();
-            resultat = medium.getId();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service creerMedium(Medium medium)", ex);
-            JpaUtil.annulerTransaction();
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
     
     public Client rechercherClientParId(Long id) {
         Client resultat = null;
@@ -184,10 +148,14 @@ Sinon on renvoie un booléen false.
             clientDao.creer(client);
             JpaUtil.validerTransaction();
             resultat = client.getId();
+            Message.envoyerMail("predictif@gmail.com",client.getEmail(), "Sujet : Bienvenue chez PREDICT’IF",
+            "Corps : Bonjour "+ client.getPrenom() + ", nous vous confirmons votre inscription au service PREDICT’IF. \nRendez-vous  vite  sur  notre  site  pour  consulter  votre profil  astrologique  et  profiter  des  dons incroyables de nos mediums");
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
             JpaUtil.annulerTransaction();
             resultat = null;
+            Message.envoyerMail("predictif@gmail.com",client.getEmail(), "Sujet : Bienvenue chez PREDICT’IF",
+            "Corps : Bonjour "+ client.getPrenom() + ", votre inscription au service PREDICT’IF a malencontreusement échoué. \n Merci de recommencer ultérieurement.");
         } finally {
             JpaUtil.fermerContextePersistance();
         }
@@ -399,8 +367,9 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
  
  Decription : Cette fonction change le statut de l'employé et de la consultation
  
- Algorithme : Ce service change le bool consultationEnCours d'employe et le bool enCours de SeanceVoyance et d'autre trucs aussi
-     * @param seance
+ Algorithme : Ce service change le bool consultationEnCours d'employe et le bool enCours de SeanceVoyance et d'autre trucs
+     * @param client
+     * @param medium
      * @param employe
      * @return 
  **/
