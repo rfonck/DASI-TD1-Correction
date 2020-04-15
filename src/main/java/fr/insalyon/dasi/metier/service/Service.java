@@ -13,6 +13,7 @@ import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.SeanceVoyance;
 import fr.insalyon.dasi.util.AstroTest;
+import fr.insalyon.dasi.util.Message;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,16 +53,16 @@ public class Service {
         return resultat;
     }
 
-    public Long creerMedium(Medium seance) {
+    public Long creerMedium(Medium medium) {
         Long resultat = null;
         JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
-            mediumDao.creer(seance);
+            mediumDao.creer(medium);
             JpaUtil.validerTransaction();
-            resultat = seance.getId();
+            resultat = medium.getId();
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service creerMedium(Medium medium)", ex);
             JpaUtil.annulerTransaction();
             resultat = null;
         } finally {
@@ -90,7 +91,7 @@ public class Service {
         try {
             resultat = seanceVoyanceDao.chercherParId(id);
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherSeanceVoyanceParId(id)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -104,7 +105,7 @@ public class Service {
         try {
             resultat = employeDao.chercherParMail(mail);
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherEmployeParMail(mail)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -118,7 +119,7 @@ public class Service {
         try {
             resultat = clientDao.chercherParMail(mail);
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParMail(mail)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -132,7 +133,7 @@ public class Service {
         try {
             resultat = mediumDao.chercherParNomAstrologue(nom);
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherAstrologueParNom(nom)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -146,7 +147,7 @@ public class Service {
         try {
             resultat = mediumDao.chercherParDenomination(nom);
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherMedium(nom)", ex);
             resultat = null;
         } finally {
             JpaUtil.fermerContextePersistance();
@@ -168,21 +169,7 @@ public class Service {
         return resultat;
     }
 
-    public Astrologue chercherAstrologueParId(long id) {
-        Astrologue resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            resultat = mediumDao.chercherParIdAstrologue(id);
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service rechercherClientParId(id)", ex);
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
 
-    
     /**
      * Service :  inscrireClient(Client nouveauClient)
 
@@ -221,8 +208,7 @@ Sinon on renvoie un NULL
      * @param mail
      * @param motDePasse
      * @return  **/
-        
-        
+         
     public String identifierUtilisateur(String mail, String motDePasse) {
         String resultat = null;
         JpaUtil.creerContextePersistance();
@@ -254,7 +240,7 @@ Sinon on renvoie un NULL
         return resultat;
     }
         
-        /**
+    /**
 
 Service : connecterClient(String email, string motDePasse)
 
@@ -265,7 +251,7 @@ Il renvoie ensuite cet objet.
      * @param motDePasse
      * @return 
 **/
-        public Client connecterClient(String mail, String motDePasse) {
+    public Client connecterClient(String mail, String motDePasse) {
         Client resultat = null;
         JpaUtil.creerContextePersistance();
         try {
@@ -284,10 +270,7 @@ Il renvoie ensuite cet objet.
             JpaUtil.fermerContextePersistance();
         }
         return resultat;
-    }
-    
-    
-    
+    }  
     
     /**
 Service : connecterClient(String email, string motDePasse)
@@ -320,8 +303,7 @@ Il renvoie ensuite cet objet.
         return resultat;
     }
         
-        
-        /**
+    /**
 Service :  consulterListeMedium()
 
 
@@ -348,9 +330,7 @@ Ce sont des objets dont les données sont stockées dans la base de donnée du s
         }
         return resultat;
     }
-   
-
-
+  
     /**
     Service :  consulterHistoriqueSeances(Client client)
 
@@ -374,31 +354,31 @@ description : Cette fonction fournit l’historique des consultations du client 
         return resultat;
     }
     
-    
-    
-    
-/**
+    /**
 Service : soliciterMedium(médium X, employe e)
 
 description : Cette fonction permet de chercher l’employé le plus apte à faire la consultation.Renvoie un objet de type employé.Algorithme : 
-Un premier tri est fait selon le genre, puis l’employé avec le moins de consultations est renvoyé. Si aucun employé n’est dispo renvoyer un employé vide
+Un premier tri est fait selon le genre, puis l’employé avec le moins de consultations est renvoyé.Si aucun employé n’est dispo renvoyer un employé vide
      * @param medium
+     * @param client
      * @return 
 **/
 
-    public Employe solliciterMedium (Medium medium){
-        Employe resultat = null;
+    public Employe solliciterMedium (Medium medium, Client client){
+        Employe employe = null;
         JpaUtil.creerContextePersistance();
         try {
-            resultat = employeDao.rechercheEmployeApte(medium);
+            employe = employeDao.rechercheEmployeApte(medium);
+            String num = Integer.toString(employe.getNumTel());
+            Message.envoyerNotification( num ,"Pour : "+ employe.getprenom() + " "+ employe.getNom() + ", Tel : "+num +" Message : Bonjour "+ employe.getprenom() + ". Consultation requise pour "+ client.getprenom() +" " + client.getprenom() + " Médium à incarner : " + medium.getDenomination());
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service SolliciterMedium", ex);
-            resultat = null;
+            employe = null;
         } finally {
             JpaUtil.fermerContextePersistance();
         }
 
-        return resultat;
+        return employe;
     }
     
     public Long inscrireSeanceVoyance(SeanceVoyance seance) {
@@ -410,7 +390,7 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
             JpaUtil.validerTransaction();
             resultat = seance.getId();
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireSeanceVoyance(client)", ex);
             JpaUtil.annulerTransaction();
             resultat = null;
         } finally {
@@ -418,7 +398,8 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
         }
         return resultat;
     }
-/**
+ 
+    /**
  Service : accepterConsultation(Employe employe)
  
  Decription : Cette fonction change le statut de l'employé et de la consultation
@@ -428,7 +409,8 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
      * @param employe
      * @return 
  **/
-public int AccepterConsultation(SeanceVoyance seance,Employe employe){
+
+    public int AccepterConsultation(SeanceVoyance seance,Employe employe){
     int resultat = 0;
     JpaUtil.creerContextePersistance();
         try {
@@ -437,7 +419,7 @@ public int AccepterConsultation(SeanceVoyance seance,Employe employe){
             resultat = seanceVoyanceDao.accepterSeance(seance);
             JpaUtil.validerTransaction();
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service SolliciterMedium", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service AccepterConsultation(seance, employe)", ex);
             JpaUtil.annulerTransaction();
             resultat = 0;
         } finally {
@@ -447,7 +429,8 @@ public int AccepterConsultation(SeanceVoyance seance,Employe employe){
         return resultat;
     
 }
-/**
+
+    /**
 Service :  GenererProfilAstro(Client client)
 
 description : Cette fonction renvoie un objet du type profilAstro personnalisé au client passé au paramètre.Algorithme : Ce service réalise une requête au service web externe IfAstroNet et renvoie le résultat.
@@ -456,28 +439,40 @@ description : Cette fonction renvoie un objet du type profilAstro personnalisé 
      * @throws java.io.IOException 
 */
 
-public List<String> GenererProfilAstro(Client client) throws IOException{
-    
-    AstroTest interfaceProfil = new AstroTest();
-    List<String> profilAstro = interfaceProfil.getProfil( client.getPrenom() , client.getDateNaissance().getTime());
-    return profilAstro;
-}
+    public List<String> GenererProfilAstro(Client client)  {
+
+        List<String> profilAstro;     
+        
+        try {
+            Calendar aujourdhui = Calendar.getInstance(); 
+            AstroTest interfaceProfil = new AstroTest();
+            profilAstro = interfaceProfil.getProfil( client.getPrenom() , client.getDateNaissance().getTime());
+        
+        } catch (IOException ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service GenererProfilAstro(client)", ex);
+            profilAstro = null;
+        } finally {
+        }
+        
+        return profilAstro;
+    }
 
 
-/*
+/**
 Service :  soumettreNote(seanceVoyance seance, String commentaire)
 
-description : Ce service ajoute le commentaire à la séance passé en paramètre.
-
-Algorithme : Ce service crée ou modifie l’attribut Commentaire de l’objet seanceVoyance passé en commentaire pour lui donner la valeur du commentaire passé en paramètre.
-*/
+description : Ce service ajoute le commentaire à la séance passé en paramètre.Algorithme : Ce service crée ou modifie l’attribut Commentaire de l’objet seanceVoyance passé en commentaire pour lui donner la valeur du commentaire passé en paramètre.
+     * @param seance
+     * @param commentaire
+     * @return 
+**/
 
 public SeanceVoyance SoumettreNote(SeanceVoyance seance, String commentaire){
     
     seance.setCommentaire(commentaire);
     return seance;
 }
-/*
+/**
 
 
 Service :  string generateurVoyance (int noteAmour, int noteTravail , int noteSanté)
@@ -486,7 +481,7 @@ description : Prend les trois notes en paramètre et renvoie une prédiction ada
 
 Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phrase est associée. Il y a donc 12 phrases différentes à créer. 
 La fonction renverra un string contenant toutes les prédictions.
-*/
+**/
 
 public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) throws IOException{
     
@@ -496,14 +491,14 @@ public List<String> generateurVoyance(Client client, int noteAmour, int noteTrav
     return profilAstro;
 }
 
-/*
+/**
 Service : finSeance(seanceVoyance seance) 
 
 description : Ce service archive la séance.
 
 Algorithme : Ce service change l’attribut “fin” de l’objet séance passée en paramètre au Timestamp actuel, puis elle l’enregistre dans la base de donnée et la détruit. On renvoie true si la procédure s’est déroulée correctement et false sinon
 
-     */
+     **/
     
     public void finSeance(SeanceVoyance seance) {
         seance.FinaliserSeance();
@@ -513,7 +508,7 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
             seanceVoyanceDao.creer(seance);
             JpaUtil.validerTransaction();
         } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service inscrireClient(client)", ex);
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service finSeance(seance)", ex);
             JpaUtil.annulerTransaction();
         } finally {
             JpaUtil.fermerContextePersistance();

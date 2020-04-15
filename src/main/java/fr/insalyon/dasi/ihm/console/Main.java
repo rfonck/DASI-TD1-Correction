@@ -10,9 +10,13 @@ import fr.insalyon.dasi.metier.modele.Spirite;
 import fr.insalyon.dasi.metier.modele.Cartomancien;
 import fr.insalyon.dasi.metier.modele.Astrologue;
 import fr.insalyon.dasi.metier.service.Service;
+import fr.insalyon.dasi.util.AstroTest;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,20 +44,21 @@ public class Main {
         Client Matteo = new Client( "dumont", "mateeo", aujourdhui, "iii", "eee", 123456789, "MotDePasse","cancer", "mateo","mateo", "blanc cassé");
        
 
-        /** test de services **/
-        System.out.println("-------- test de services -------- " );
+        /** test des inscriptions **/
+        System.out.println("-------- test de inscriptions -------- " );
         
         
         Service service = new Service();
-
         service.inscrireClient(Matteo);
         service.InitialisationMediumsEmployes();    
-        long bite  = 1;
         
-        Client iencli = service.rechercherClientParId(bite);
+        /** tests de recherche **/
+        long id  = 1;
+        
+        Client iencli = service.rechercherClientParId(id);
         Client client = service.rechercherClientParMail("eee");       
         Employe emplo = service.rechercherEmployeParMail("Email");
-        Astrologue astro = service.chercherAstrologueParId(bite);
+        Medium astro = service.rechercherMedium("Serena");
      
         //test de création et persistance d'objets
         System.out.println("-------- test de création et persistance d'objets -------- " );
@@ -99,7 +104,7 @@ public class Main {
         Medium jj = service.rechercherMedium("Serena");
         //test recherche employe
         System.out.println("-------- test recherche employe  -------- " ); 
-        Employe lemploye = service.solliciterMedium(jj);
+        Employe lemploye = service.solliciterMedium(jj,client);
         System.out.println("-> " + lemploye.toString());
         
         //test recherche medium
@@ -112,6 +117,77 @@ public class Main {
         service.AccepterConsultation(newseance, lemploye);
         Employe ronaldo = service.rechercherEmployeParMail(lemploye.getEmail());
         System.out.println("-> " + ronaldo.toString());
+        
+        //test validation seance voyance
+        System.out.println("-------------------------------------------- " ); 
+        System.out.println("--------test de déroulement de séance------- " ); 
+        System.out.println("-------------------------------------------- " ); 
+        System.out.println("  " ); 
+        System.out.println("1. Le client se connecte " ); 
+        System.out.println("  " ); 
+        
+        String email = "eee";
+        String mdp = "MotDePasse";
+        
+        String denomination = service.identifierUtilisateur(email, mdp);
+        System.out.println("    -> " + denomination);
+        
+        Client client1 = service.connecterClient(email, mdp);
+        System.out.println("    -> " + client1.toString());
+        
+        System.out.println("  " ); 
+        System.out.println("2. Le client consulte son  profil astro " ); 
+        System.out.println("  " ); 
+        
+        AstroTest test = new AstroTest();
+        
+        List<String> profil = service.GenererProfilAstro(client1);
+     
+        System.out.println("        Profil astro :" );
+        for(int i = 0; i< profil.size() ; i++)
+        {
+            System.out.println( profil.get(i).toString());
+        }
+        
+        System.out.println("  " ); 
+        System.out.println("3. Le client consulte son historique " ); 
+        System.out.println("  " );
+        
+        List<SeanceVoyance> histo = service.ConsulterHistoriqueSeances(client1);
+            
+        for(int i = 0; i< histo.size() ; i++)
+        {
+                 System.out.println("       Séance de voyance n°  " + i +  " "+   histo.get(i).toString());
+        }
+        
+        System.out.println("  " ); 
+        System.out.println("4. Le client décide de demander à voir la liste des mediums " ); 
+        System.out.println("  " );
+                
+        List<Medium> mediums = service.listerMedium();
+        
+        System.out.println("        nous vous proposons nos médiums : " );
+        for(int i = 0; i< mediums.size() ; i++)
+        {
+                 System.out.println("       Séance de voyance n°  " + i +  " "+   mediums.get(i).toString());
+        }
+       
+        
+        System.out.println("  " ); 
+        System.out.println("4. Il a choisi un médium pour sa consultation et le sollicite " ); 
+        System.out.println("  " );
+                
+        Medium aSolliciter = service.rechercherMedium("Mme Irma");
+        Employe apte = service.solliciterMedium(aSolliciter, client1);
+        
+        System.out.println("       L'employé " + apte.toString() + " va interpréter ce rôle");
+        
+        System.out.println("  " ); 
+        System.out.println("5. Le medium accepte le job " ); 
+        System.out.println("  " );
+
+
+
         
         JpaUtil.destroy();
     }
