@@ -169,7 +169,6 @@ public class Service {
         return resultat;
     }
 
-
     /**
      * Service :  inscrireClient(Client nouveauClient)
 
@@ -273,7 +272,7 @@ Il renvoie ensuite cet objet.
     }  
     
     /**
-Service : connecterClient(String email, string motDePasse)
+Service : connecterEmploye(String email, string motDePasse)
 
 description : Renvoie l’employé associé à l’adresse mail et au mot de passe.Algorithme : Ce service réalise une sélection sur la table contenant les employés.Les contraintes sur la table imposent qu’un seul tuple sera retourné.Le service réalise un objet employe grâce aux données récupérées.
 
@@ -410,13 +409,21 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
      * @return 
  **/
 
-    public int AccepterConsultation(SeanceVoyance seance,Employe employe){
+    public SeanceVoyance AccepterConsultation(SeanceVoyance seance){
     int resultat = 0;
+    Client client = seance.getClient();
+    Medium medium = seance.getMedium();
+    Employe employe = seance.getEmploye();
+    seance.setEnCours(true);
     JpaUtil.creerContextePersistance();
         try {
             JpaUtil.ouvrirTransaction();
             employeDao.accepterSeance(employe);
             resultat = seanceVoyanceDao.accepterSeance(seance);
+            Message.envoyerNotification(Integer.toString(client.getNumTel()), "Pour : "+ client.getPrenom() + " "+ client.getNom()+", Tel : "+ client.getnumTel()+ "\n" +
+"Message : Bonjour "+ client.getPrenom() + ". J’ai bien reçu votre demande de consultation du "+ Calendar.getInstance().getTime().toString() + ".\n" +
+"Vous pouvez dès à présent me contacter au "+ Integer.toString(employe.getNumTel()) + ". A tout de suite ! Médiumiquement\n" +
+"vôtre, "+ medium.getDenomination() );
             JpaUtil.validerTransaction();
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service AccepterConsultation(seance, employe)", ex);
@@ -426,7 +433,7 @@ Un premier tri est fait selon le genre, puis l’employé avec le moins de consu
             JpaUtil.fermerContextePersistance();
         }
 
-        return resultat;
+        return seance;
     
 }
 
@@ -458,7 +465,7 @@ description : Cette fonction renvoie un objet du type profilAstro personnalisé 
     }
 
 
-/**
+    /**
 Service :  soumettreNote(seanceVoyance seance, String commentaire)
 
 description : Ce service ajoute le commentaire à la séance passé en paramètre.Algorithme : Ce service crée ou modifie l’attribut Commentaire de l’objet seanceVoyance passé en commentaire pour lui donner la valeur du commentaire passé en paramètre.
@@ -467,12 +474,13 @@ description : Ce service ajoute le commentaire à la séance passé en paramètr
      * @return 
 **/
 
-public SeanceVoyance SoumettreNote(SeanceVoyance seance, String commentaire){
+    public SeanceVoyance SoumettreNote(SeanceVoyance seance, String commentaire){
     
     seance.setCommentaire(commentaire);
     return seance;
 }
-/**
+
+    /**
 
 
 Service :  string generateurVoyance (int noteAmour, int noteTravail , int noteSanté)
@@ -483,7 +491,7 @@ Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phras
 La fonction renverra un string contenant toutes les prédictions.
 **/
 
-public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) throws IOException{
+    public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) throws IOException{
     
     AstroTest interfaceProfil = new AstroTest();
     List<String> profilAstro ;
@@ -491,7 +499,7 @@ public List<String> generateurVoyance(Client client, int noteAmour, int noteTrav
     return profilAstro;
 }
 
-/**
+    /**
 Service : finSeance(seanceVoyance seance) 
 
 description : Ce service archive la séance.
@@ -514,14 +522,16 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
             JpaUtil.fermerContextePersistance();
         }
     }
-/*
+    
+    /**
 Service : InitialisationMediums() 
 
 description : Ce service enrengistre les médiums présents de base.
 
 Algorithme :IOException
 
-     */
+     **/
+    
     public void InitialisationMediumsEmployes() {
         Medium aurel = new Spirite("Gwenaëlle", "Spécialiste des grandes conversations au-delà de TOUTES les frontières.", "F", "Boule de cristal");       
         Medium romain = new Spirite("Professeur Tran", "Marc de café, boule de cristal, oreilles de lapin", "H", "Votre avenir est devant vous: regardons-le ensemble!");

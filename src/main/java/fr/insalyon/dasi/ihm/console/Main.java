@@ -114,7 +114,7 @@ public class Main {
         //test validation seance voyance
         System.out.println("-------- test modif seance voyance  -------- " ); 
         SeanceVoyance newseance = service.rechercherSeanceVoyanceParId(lid);
-        service.AccepterConsultation(newseance, lemploye);
+        service.AccepterConsultation(newseance);
         Employe ronaldo = service.rechercherEmployeParMail(lemploye.getEmail());
         System.out.println("-> " + ronaldo.toString());
         
@@ -182,11 +182,22 @@ public class Main {
         
         System.out.println("       L'employé " + apte.toString() + " va interpréter ce rôle");
         
+        SeanceVoyance nouvSeance = new SeanceVoyance(client1, apte, aSolliciter);
+        
+        System.out.println("       On crée et inscrit la séance : " + nouvSeance.toString());
+        
+        service.inscrireSeanceVoyance(nouvSeance);
+        
+        
         System.out.println("  " ); 
         System.out.println("5. Le medium accepte le job " ); 
         System.out.println("  " );
 
+        service.AccepterConsultation(nouvSeance);
 
+        System.out.println("  " ); 
+        System.out.println("5. Le medium accepte le job " ); 
+        System.out.println("  " );
 
         
         JpaUtil.destroy();

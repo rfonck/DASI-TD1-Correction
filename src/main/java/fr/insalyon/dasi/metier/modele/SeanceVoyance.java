@@ -52,8 +52,8 @@ public class SeanceVoyance implements Serializable {
 
 
 
-    public SeanceVoyance(Calendar debut, Client client, Employe employe, Medium medium) {
-        this.debut = debut;
+    public SeanceVoyance(Client client, Employe employe, Medium medium) {
+        this.debut = Calendar.getInstance();
         this.client = client;
         this.employe = employe;
         this.medium = medium;
