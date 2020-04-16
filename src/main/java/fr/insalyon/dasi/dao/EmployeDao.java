@@ -36,7 +36,7 @@ public class EmployeDao {
     
     public List<Employe> listerEmployers() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Utilisateur c ORDER BY c.nom ASC, c.prenom ASC", Employe.class);
+        TypedQuery<Employe> query = em.createQuery("SELECT c FROM Employe c ORDER BY c.nom ASC, c.prenom ASC", Employe.class);
         return query.getResultList();
     }
     
@@ -58,6 +58,16 @@ public class EmployeDao {
         query.setParameter("id", employe.getId()); // correspond au paramètre ":mail" dans la requête
         int n = query.executeUpdate();
         return n;
+    }
+    
+    public int finirSeance(Employe employe){
+        EntityManager em = JpaUtil.obtenirContextePersistance();
+ 
+        TypedQuery<Employe> query1 = em.createQuery("UPDATE Employe c SET c.consultationEnCours = false, c.nombreSeance = c.nombreSeance +1   WHERE c.id = :id", Employe.class);
+        query1.setParameter("id", employe.getId()); // correspond au paramètre ":mail" dans la requête
+        int n1 = query1.executeUpdate();
+
+        return n1;
     }
 }
 

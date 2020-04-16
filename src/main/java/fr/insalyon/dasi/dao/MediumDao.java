@@ -111,7 +111,7 @@ public class MediumDao {
     public List<Medium> topMediums() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         Query query = em.createQuery("SELECT s.medium FROM SeanceVoyance s GROUP BY s.medium ORDER BY count(s) ");
-        return query.getResultList();
+        return query.setMaxResults(5).getResultList();
     }
     
     

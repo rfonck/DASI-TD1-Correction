@@ -51,6 +51,7 @@ public class SeanceVoyanceDao {
     query.setParameter("medium", medium);
     return query.getResultList();
     }
+
     
     // modifier / supprimer  ... 
 }
