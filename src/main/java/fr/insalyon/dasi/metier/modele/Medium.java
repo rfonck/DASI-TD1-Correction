@@ -27,7 +27,6 @@ public class Medium implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long id;
-
     protected String sexe;
     protected String denomination;
 

@@ -32,7 +32,7 @@ public class Service {
     protected EmployeDao employeDao = new EmployeDao();
     protected SeanceVoyanceDao seanceVoyanceDao = new SeanceVoyanceDao();
     protected MediumDao mediumDao = new MediumDao();
-
+    protected AstroTest interfaceProfil = new AstroTest(); 
 
     
     public Client rechercherClientParId(Long id) {
@@ -140,7 +140,6 @@ Sinon on renvoie un booléen false.
         client.setCouleurBonheur(caracteristiquesAstrologiques.get(2));    
         client.setSigneAstrologique(caracteristiquesAstrologiques.get(0));
         client.setSigneChinois(caracteristiquesAstrologiques.get(1));          
-        
         
         JpaUtil.creerContextePersistance();
         try {
@@ -283,8 +282,6 @@ Ce sont des objets dont les données sont stockées dans la base de donnée du s
         JpaUtil.creerContextePersistance();
         try {
             resultat = mediumDao.listerMediums();
-           
-            
         } catch (Exception ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service listerMediums()", ex);
             resultat = null;
@@ -401,8 +398,7 @@ Service :  GenererProfilAstro(Client client)
 
 description : Cette fonction renvoie un objet du type profilAstro personnalisé au client passé au paramètre.Algorithme : Ce service réalise une requête au service web externe IfAstroNet et renvoie le résultat.
      * @param client 
-     * @return  
-     * @throws java.io.IOException 
+     * @return 
 */
 
     public List<String> GenererProfilAstro(Client client)  {
@@ -410,10 +406,7 @@ description : Cette fonction renvoie un objet du type profilAstro personnalisé 
         List<String> profilAstro;     
         
         try {
-            Calendar aujourdhui = Calendar.getInstance(); 
-            AstroTest interfaceProfil = new AstroTest();
             profilAstro = interfaceProfil.getProfil( client.getPrenom() , client.getDateNaissance().getTime());
-        
         } catch (IOException ex) {
             Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service GenererProfilAstro(client)", ex);
             profilAstro = null;
@@ -446,13 +439,17 @@ Service :  string generateurVoyance (int noteAmour, int noteTravail , int noteSa
 
 description : Prend les trois notes en paramètre et renvoie une prédiction adaptée
 
-Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phrase est associée. Il y a donc 12 phrases différentes à créer. 
-La fonction renverra un string contenant toutes les prédictions.
+Algorithme : Pour chaque notes de chaque type (Amour, Travail, Santé) une phrase est associée.Il y a donc 12 phrases différentes à créer.La fonction renverra un string contenant toutes les prédictions.
+     * @param client
+     * @param noteAmour
+     * @param noteTravail
+     * @param noteSante
+     * @return 
 **/
 
     public List<String> generateurVoyance(Client client, int noteAmour, int noteTravail , int noteSante) {
     
-    AstroTest interfaceProfil = new AstroTest();    
+       
     List<String> prediction = null ;
     
     try {
@@ -527,4 +524,24 @@ Algorithme :IOException
             JpaUtil.fermerContextePersistance();
         }
     }
+/**
+Service : topMedium()
+
+description : Ce service renvoye une liste de mediums.Algorithme :IOException
+     * @return
+**/
+    public List<Medium> topMedium() {
+        List<Medium> resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = mediumDao.topMediums();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service topMediums()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
+    }
+    
 }
