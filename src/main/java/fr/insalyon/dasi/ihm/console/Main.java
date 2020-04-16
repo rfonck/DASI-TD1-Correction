@@ -168,6 +168,18 @@ public class Main {
         
         
         
+        
+        
+        System.out.println("  " ); 
+        System.out.println("9. TOP MEDIUUUUUM" ); 
+        System.out.println("  " );
+        
+        List<Medium> top = service.topMedium();
+        
+        for(int i = 0; i< top.size() ; i++)
+        {
+            System.out.println("       Medium n°  " + i +  " "+   top.get(i).toString());
+        }
         JpaUtil.destroy();
     }
 }
