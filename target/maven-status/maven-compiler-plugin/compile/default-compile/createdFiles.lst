@@ -10,11 +10,9 @@ fr\insalyon\dasi\metier\modele\Medium.class
 fr\insalyon\dasi\metier\modele\Astrologue.class
 fr\insalyon\dasi\metier\modele\Medium_.class
 fr\insalyon\dasi\dao\EmployeDao.class
-fr\insalyon\dasi\ihm\console\Astrotest.class
 fr\insalyon\dasi\metier\modele\Client_.class
 fr\insalyon\dasi\metier\modele\SeanceVoyance.class
 fr\insalyon\dasi\metier\modele\Utilisateur.class
-fr\insalyon\dasi\metier\service\seanceVoyance.class
 fr\insalyon\dasi\metier\modele\Cartomancien.class
 fr\insalyon\dasi\metier\modele\Astrologue_.class
 fr\insalyon\dasi\metier\service\Service.class

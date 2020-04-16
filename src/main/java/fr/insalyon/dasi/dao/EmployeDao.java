@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author DASI Team
+ * @author  Romain FONCK et Jean Jacques MELDRUM
  */
 public class EmployeDao {
     

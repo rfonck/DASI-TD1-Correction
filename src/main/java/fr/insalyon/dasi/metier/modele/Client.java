@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author DASI Team
+ * @author  Romain FONCK et Jean Jacques MELDRUM
  */
 
 @Entity

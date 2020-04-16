@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author rfonc
+ * @author  Romain FONCK et Jean Jacques MELDRUM
  */
 @Entity
 public class Spirite extends Medium implements Serializable  {

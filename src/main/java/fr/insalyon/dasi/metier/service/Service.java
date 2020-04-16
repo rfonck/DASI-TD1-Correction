@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author DASI Team
+ * @author  Romain FONCK et Jean Jacques MELDRUM
  */
 public class Service {
 
@@ -493,8 +493,13 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
     }
     
     /**
-Service : String[][] RepartitionMedium()
-     * @return
+
+Service : RepartitionMedium
+
+Description : Ce service renvoie la liste des médiums avec le nombre de consultations associé.
+
+Algorithme : Ce service va utiliser une requête jpql pour déterminer le nombre de consultations de chaque médium, puis il va renvoyer une liste contenant tous les médiums avec leur nombre de consultation.
+
 */
 
     public HashMap RepartitionMedium() 
@@ -520,8 +525,12 @@ Service : String[][] RepartitionMedium()
     
     
     /**
-Service : String[][] RepartitionEmploye()
-     * @return
+Service : RepartitionEmploye 
+
+Description : Ce service renvoie la liste des employés avec le nombre de consultations associé
+
+Algorithme : Ce service va utiliser une requête jpql pour déterminer le nombre de consultations de chaque employé, puis il va renvoyer une liste contenant tous les employés avec leur nombre de consultation.
+
 */
 
     public HashMap RepartitionEmploye() 
@@ -542,6 +551,29 @@ Service : String[][] RepartitionEmploye()
             JpaUtil.fermerContextePersistance();
         }
         return lhm;
+    }
+    
+    
+/**
+Service : List<Medium>TopMedium() 
+
+Description : Ce service renvoie la liste des 5 premiers médiums de l’agence dans l'ordre décroissant de leur popularité.
+
+Algorithme : Ce service va utiliser une requête jpql pour déterminer le nombre de consultations de chaque médium, puis il va renvoyer une liste contenant les 5 premiers. 
+
+**/
+    public List<Medium> topMedium() {
+        List<Medium> resultat = null;
+        JpaUtil.creerContextePersistance();
+        try {
+            resultat = mediumDao.topMediums();
+        } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service topMediums()", ex);
+            resultat = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return resultat;
     }
     
     
@@ -582,24 +614,5 @@ description : Ce service enrengistre les médiums et les employés présents de 
             JpaUtil.fermerContextePersistance();
         }
     }
-/**
-Service : topMedium()
 
-description : Ce service renvoye une liste de mediums.Algorithme :IOException
-     * @return
-**/
-    public List<Medium> topMedium() {
-        List<Medium> resultat = null;
-        JpaUtil.creerContextePersistance();
-        try {
-            resultat = mediumDao.topMediums();
-        } catch (Exception ex) {
-            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service topMediums()", ex);
-            resultat = null;
-        } finally {
-            JpaUtil.fermerContextePersistance();
-        }
-        return resultat;
-    }
-    
 }

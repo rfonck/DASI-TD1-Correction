@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author DASI Team
+ * @author  Romain FONCK et Jean Jacques MELDRUM
  */
 public class MediumDao {
     
@@ -43,33 +43,8 @@ public class MediumDao {
         return em.find(Medium.class, mediumsId); // renvoie null si l'identifiant n'existe pas
     }
     
-    public Spirite chercherParIdSpirite(Long spiriteId) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        return em.find(Spirite.class, spiriteId); // renvoie null si l'identifiant n'existe pas
-    }
     
-    public Cartomancien chercherParIdCartomancien(Long cartomancienId) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        return em.find(Cartomancien.class, cartomancienId); // renvoie null si l'identifiant n'existe pas
-    }
-    
-    public Astrologue chercherParIdAstrologue(Long astroId) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        return em.find(Astrologue.class, astroId); // renvoie null si l'identifiant n'existe pas
-    }
-    
-    public Astrologue chercherParNomAstrologue(String denomination) {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Astrologue> query = em.createQuery("SELECT a FROM Astrologue a WHERE a.denomination = :denomination", Astrologue.class);
-        query.setParameter("denomination", denomination); // correspond au paramètre ":mail" dans la requête
-        List<Astrologue> clients = query.getResultList();
-        Astrologue result = null;
-        if (!clients.isEmpty()) {
-            result = clients.get(0); // premier de la liste
-        }
-        return result;
-    }
-    
+
     public Medium chercherParDenomination(String denomination) {
         EntityManager em = JpaUtil.obtenirContextePersistance();
         TypedQuery<Medium> query = em.createQuery("SELECT a FROM Medium a WHERE a.denomination = :denomination", Medium.class);
@@ -81,24 +56,7 @@ public class MediumDao {
         }
         return result;
     }
-    
-    public List<Astrologue> listerAstrologue() {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Astrologue> query = em.createQuery("SELECT m FROM Astrologue m ", Astrologue.class);
-        return query.getResultList();
-    }
-    
-    public List<Cartomancien> listerCartomancien() {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Cartomancien> query = em.createQuery("SELECT m FROM Cartomancien m", Cartomancien.class);
-        return query.getResultList();
-    }
-    
-    public List<Spirite> listerSpirite() {
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<Spirite> query = em.createQuery("SELECT m FROM Spirite m ", Spirite.class);
-        return query.getResultList();
-    }    
+ 
     
     public List<Medium> listerMediums() {
         EntityManager em = JpaUtil.obtenirContextePersistance();
@@ -115,5 +73,5 @@ public class MediumDao {
     }
     
     
-    // modifier / supprimer  ... 
+
 }

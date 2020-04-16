@@ -3,25 +3,16 @@ package fr.insalyon.dasi.ihm.console;
 import fr.insalyon.dasi.dao.JpaUtil;
 import fr.insalyon.dasi.metier.modele.Client;
 import fr.insalyon.dasi.metier.modele.Employe;
-import fr.insalyon.dasi.metier.modele.Utilisateur;
 import fr.insalyon.dasi.metier.modele.SeanceVoyance;
 import fr.insalyon.dasi.metier.modele.Medium;
-import fr.insalyon.dasi.metier.modele.Spirite;
-import fr.insalyon.dasi.metier.modele.Cartomancien;
-import fr.insalyon.dasi.metier.modele.Astrologue;
 import fr.insalyon.dasi.metier.service.Service;
-import fr.insalyon.dasi.util.AstroTest;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author DASI Team
+ * @author Romain FONCK et Jean Jacques MELDRUM
  */
 public class Main {
 
@@ -30,10 +21,10 @@ public class Main {
         JpaUtil.init();
         
         Service service = new Service();
+        //on utilise le service suivant pour initialiser les Médiums et employés de base
         service.InitialisationMediumsEmployes();
         Calendar aujourdhui = Calendar.getInstance();
         
-        //test validation seance voyance
         System.out.println("-------------------------------------------- " ); 
         System.out.println("--------test de déroulement de séance------- " ); 
         System.out.println("-------------------------------------------- " ); 
