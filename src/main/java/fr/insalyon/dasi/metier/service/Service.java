@@ -15,9 +15,12 @@ import fr.insalyon.dasi.metier.modele.SeanceVoyance;
 import fr.insalyon.dasi.util.AstroTest;
 import fr.insalyon.dasi.util.Message;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -493,11 +496,66 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
     }
     
     /**
-Service : InitialisationMediums() 
+Service : String[][] RepartitionMedium()
+     * @return
+*/
 
-description : Ce service enrengistre les médiums présents de base.
+    public HashMap RepartitionMedium() 
+    {
+        
+        HashMap<Integer, Medium> lhm = new HashMap<>();
+        List<Medium> tous = null;
+        List<String> list = new ArrayList<String>();
+        JpaUtil.creerContextePersistance();
+        try {
+            tous = mediumDao.listerMediums();
+        for (int i = 0; i< tous.size(); i++) {
+            int a = SeanceVoyanceDao.listerSeanceVoyanceParMedium(tous.get(i)).size();
+            lhm.put(a, tous.get(i));
+        }
+         } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service RepartitionMedium()", ex);
+            tous = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return lhm;
+    }
+    
+    
+    /**
+Service : String[][] RepartitionEmploye()
+     * @return
+*/
 
-Algorithme :IOException
+    public HashMap RepartitionEmploye() 
+    {
+        HashMap<Integer, Employe> lhm = new HashMap<>();
+        List<Employe> tous = null;
+        List<String> list = new ArrayList<String>();
+        JpaUtil.creerContextePersistance();
+        try {
+            tous = employeDao.listerEmployers();
+        for (int i = 0; i< tous.size(); i++) {
+            int a = SeanceVoyanceDao.listerSeanceVoyanceParEmploye(tous.get(i)).size();
+            lhm.put(a, tous.get(i));
+        }
+         } catch (Exception ex) {
+            Logger.getAnonymousLogger().log(Level.WARNING, "Exception lors de l'appel au Service RepartitionEmploye()", ex);
+            tous = null;
+        } finally {
+            JpaUtil.fermerContextePersistance();
+        }
+        return lhm;
+    }
+    
+    
+    
+ /*
+Service : InitialisationMediumsEmployes() 
+
+description : Ce service enrengistre les médiums et les employés présents de base.
+
 
      **/
     

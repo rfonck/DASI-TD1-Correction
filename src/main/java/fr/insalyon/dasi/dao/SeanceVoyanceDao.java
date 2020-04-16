@@ -51,15 +51,6 @@ public class SeanceVoyanceDao {
     query.setParameter("medium", medium);
     return query.getResultList();
     }
-    
-    public int accepterSeance(SeanceVoyance seance){
-        EntityManager em = JpaUtil.obtenirContextePersistance();
-        TypedQuery<SeanceVoyance> query = em.createQuery("UPDATE SeanceVoyance c SET c.enCours = true, c.employe = :employe, c.debut = :debut WHERE c.id = :id", SeanceVoyance.class);
-        query.setParameter("id", seance.getId()); // correspond au paramètre ":mail" dans la requête
-        query.setParameter("employe", seance.getEmploye());
-        query.setParameter("debut", Calendar.getInstance());
-        int n = query.executeUpdate();
-        return n;
-    }
+
     // modifier / supprimer  ... 
 }

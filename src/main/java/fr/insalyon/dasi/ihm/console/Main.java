@@ -13,6 +13,7 @@ import fr.insalyon.dasi.metier.service.Service;
 import fr.insalyon.dasi.util.AstroTest;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
@@ -147,7 +148,26 @@ public class Main {
         
         seance.setCommentaire("Je ressent des ondes très positives chez ce client");
         service.finSeance(seance);
-     
+        service.finSeance(seance);
+        service.finSeance(seance);
+
+        
+        System.out.println("  " ); 
+        System.out.println("8. L'employé décide de consulter les stats de son entreprise." ); 
+        System.out.println("  " );           
+        
+        HashMap rapportEmploye = service.RepartitionEmploye();
+
+        System.out.println("    -> " + rapportEmploye.toString());    
+          
+
+        HashMap rapportMedium = service.RepartitionMedium();
+
+
+        System.out.println("    -> " + rapportMedium.toString());    
+        
+        
+        
         JpaUtil.destroy();
     }
 }
