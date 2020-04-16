@@ -39,14 +39,21 @@ public class Main {
         
         
         System.out.println("  " ); 
-        System.out.println("1. Le client se connecte " ); 
+        System.out.println("1. s'inscrit " ); 
         System.out.println("  " ); 
         
         
         Client inscrit = new Client("bastien","bertholom", aujourdhui, "INSA", "bastoche", 1234567890, "TruiteFumée");
-        service.inscrireClient(inscrit);
+        long resultat = service.inscrireClient(inscrit);
         
+        System.out.println("  " ); 
+        System.out.println("2. il teste de se connecter. " ); 
+        System.out.println("  " );        
         
+
+        Client connect = service.connecterClient("bastoche", "TruiteFumée");
+        System.out.println("    -> " + connect.toString());           
+            
         
         System.out.println("-------------------------------------------- " ); 
         System.out.println("--------test de déroulement de séance------- " ); 
@@ -101,10 +108,25 @@ public class Main {
         
        
         System.out.println("  " ); 
-        System.out.println("5. Le medium accepte le job " ); 
+        System.out.println("4. L'employé se connecte " ); 
         System.out.println("  " );
 
-        SeanceVoyance seance = service.AccepterConsultation(client1, apte, aSolliciter);
+        email = "Yoyoyo";
+        mdp = "MotDePasse";
+        
+        denomination = service.identifierUtilisateur(email, mdp);
+        System.out.println("    -> " + denomination);
+        
+        Employe employe = service.connecterEmploye(email, mdp);
+        System.out.println("    -> " + employe.toString());
+        
+        
+        
+        System.out.println("  " ); 
+        System.out.println("5. L'employé accepte le job " ); 
+        System.out.println("  " );
+
+        SeanceVoyance seance = service.AccepterConsultation(client1, employe, aSolliciter);
         
         System.out.println("       L'objet séanceVoyance est crée et initialisé, l'heure de début est l'heure courante");
         

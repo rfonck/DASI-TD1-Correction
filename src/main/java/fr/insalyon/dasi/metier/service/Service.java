@@ -479,7 +479,9 @@ Algorithme : Ce service change l’attribut “fin” de l’objet séance pass�
         seance.FinaliserSeance();
         JpaUtil.creerContextePersistance();
         try {
+            Employe employe = seance.getEmploye();
             JpaUtil.ouvrirTransaction();
+            employeDao.finirSeance(employe);
             seanceVoyanceDao.creer(seance);
             JpaUtil.validerTransaction();
         } catch (Exception ex) {
