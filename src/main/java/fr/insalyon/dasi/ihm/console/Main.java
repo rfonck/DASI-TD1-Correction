@@ -157,18 +157,10 @@ public class Main {
         System.out.println("  " );           
         
         HashMap rapportEmploye = service.RepartitionEmploye();
-
         System.out.println("    -> " + rapportEmploye.toString());    
           
-
         HashMap rapportMedium = service.RepartitionMedium();
-
-
         System.out.println("    -> " + rapportMedium.toString());    
-        
-        
-        
-        
         
         System.out.println("  " ); 
         System.out.println("9. TOP MEDIUUUUUM" ); 
